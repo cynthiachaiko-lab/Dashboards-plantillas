@@ -19,76 +19,49 @@
 <div class="strip">
   <span>Cynthia Mariel</span>
   <span class="mid">Registrar // Ahorrar // Repetir // Registrar // Ahorrar</span>
-  <span id="stripMonth">Marzo</span>
+  <span id="stripHoy">Hoy</span>
 </div>
 
-<div class="card">
+<div class="tabs">
+  <button class="tab activo" type="button" data-tab="q">Quehaceres</button>
+  <button class="tab" type="button" data-tab="f">Finanzas</button>
+</div>
+
+<!-- ══════════ QUEHACERES ══════════ -->
+<div class="card" id="panelQ">
   <div class="head">
     <div class="avatar">CM</div>
     <div>
-      <div class="name">Mis finanzas</div>
-      <div class="sub" id="headSub">@personal</div>
+      <div class="name">Mi día</div>
+      <div class="sub" id="diaSub">—</div>
     </div>
     <div class="nav">
-      <button class="navbtn" id="prevM" aria-label="Mes anterior">‹</button>
-      <button class="navbtn" id="nextM" aria-label="Mes siguiente">›</button>
+      <button class="navbtn" type="button" id="diaPrev" aria-label="Día anterior">‹</button>
+      <button class="navbtn" type="button" id="diaHoy" aria-label="Hoy">•</button>
+      <button class="navbtn" type="button" id="diaNext" aria-label="Día siguiente">›</button>
     </div>
   </div>
 
   <div class="rule"></div>
 
-  <div class="lbl">Balance del mes</div>
-  <div class="balance" id="balance">$0</div>
-  <div class="balance-note" id="balanceNote">Todavía no cargaste movimientos este mes.</div>
-
-  <div class="stats">
-    <div class="stat a"><div class="l">Ingresos</div><div class="v" id="vIng">$0</div></div>
-    <div class="stat b"><div class="l">Gastos</div><div class="v" id="vGas">$0</div></div>
-    <div class="stat c"><div class="l">Ahorro</div><div class="v" id="vAho">—</div></div>
-  </div>
-
-  <div class="rule"></div>
-
-  <h4 class="sec">
-    <span>Últimos seis meses</span>
-    <button class="linkbtn" id="toggleTable" aria-expanded="false">Ver tabla</button>
-  </h4>
-  <div class="chart-head">
-    <div class="legend">
-      <span><i class="dot ing"></i>Ingresos</span>
-      <span><i class="dot gas"></i>Gastos</span>
+  <div class="jornada">
+    <div class="jfila">
+      <span class="et">Me acosté</span>
+      <input type="time" id="jAcostada" aria-label="Hora en que me acosté">
+      <label class="chk"><input type="checkbox" id="jLargo"> Seguí de largo</label>
     </div>
+    <div class="jfila">
+      <span class="et">Me levanté</span>
+      <input type="time" id="jLevantada" aria-label="Hora en que me levanté">
+    </div>
+    <div class="jfila">
+      <span class="et">Trabajé</span>
+      <input type="time" id="jTrabDesde" aria-label="Trabajo desde">
+      <span class="sep">a</span>
+      <input type="time" id="jTrabHasta" aria-label="Trabajo hasta">
+    </div>
+    <div class="jnota" id="jNota"></div>
   </div>
-  <div class="chart-wrap" id="chartWrap">
-    <div id="chart"></div>
-    <div class="tip" id="tip" role="status"></div>
-  </div>
-  <div id="tableView" hidden></div>
-
-  <div class="rule"></div>
-
-  <h4 class="sec">Gastos por categoría</h4>
-  <div id="cats"></div>
-
-  <div class="rule"></div>
-
-  <h4 class="sec">
-    <span>Movimientos</span>
-    <button class="linkbtn" id="openCats">Categorías</button>
-  </h4>
-  <div id="txs"></div>
-
-  <div class="actions">
-    <button class="btn ing" id="addIng">+ Ingreso</button>
-    <button class="btn gas" id="addGas">+ Gasto</button>
-  </div>
-
-  <div class="rule"></div>
-
-  <h4 class="sec">
-    <span>Quehaceres</span>
-    <button class="linkbtn" id="organizar" hidden>Organizar con IA</button>
-  </h4>
 
   <div class="add-task">
     <input id="tareaNueva" type="text" maxlength="90" placeholder="Lavar los platos, pagar el gas…" aria-label="Nueva tarea">
@@ -100,15 +73,113 @@
     <span class="barrita"><div id="tareasBarra" style="width:0%"></div></span>
   </div>
 
+  <h4 class="sec">
+    <span>El plan del día</span>
+    <button class="linkbtn" type="button" id="organizar" hidden>Organizar con IA</button>
+  </h4>
+
   <div class="ia-estado" id="syncNota">Guardado en este dispositivo.</div>
   <div class="ia-estado" id="iaEstado" hidden></div>
   <div class="ia-nota" id="iaNota" hidden></div>
   <div id="tareas"></div>
 
-  <div class="icons">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#09CDCD" d="M3 7.5A2.5 2.5 0 0 1 5.5 5H18a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V7.5Zm13 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3Z"/></svg>
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#919BFF" d="M4 13h3.5v7H4v-7Zm6.2-6h3.6v13h-3.6V7ZM16.5 10H20v10h-3.5V10Z"/></svg>
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#B57BEE" d="M7 3h10a2 2 0 0 1 2 2v15.2a.8.8 0 0 1-1.25.66L12 17.2l-5.75 3.66A.8.8 0 0 1 5 20.2V5a2 2 0 0 1 2-2Z"/></svg>
+  <div class="actions">
+    <button class="btn ghost" type="button" id="btnCopiar">Copiar para Claude</button>
+    <button class="btn ghost" type="button" id="btnPegar">Pegar de Claude</button>
+  </div>
+</div>
+
+<!-- ══════════ FINANZAS ══════════ -->
+<div class="card" id="panelF" hidden>
+  <div class="candado" id="candado">
+    <h3>Finanzas</h3>
+    <p>Este panel está detrás de una clave.</p>
+    <form id="formClave">
+      <input id="clave" type="password" inputmode="numeric" maxlength="8" autocomplete="off" aria-label="Clave">
+      <button class="btn" type="submit">Entrar</button>
+    </form>
+    <div class="mal" id="claveMal"></div>
+  </div>
+
+  <div id="finanzas" hidden>
+    <div class="head">
+      <div class="avatar">CM</div>
+      <div>
+        <div class="name">Mis finanzas</div>
+        <div class="sub" id="headSub">@personal</div>
+      </div>
+      <div class="nav">
+        <button class="navbtn" type="button" id="prevM" aria-label="Mes anterior">‹</button>
+        <button class="navbtn" type="button" id="nextM" aria-label="Mes siguiente">›</button>
+      </div>
+    </div>
+
+    <div class="rule"></div>
+
+    <div class="lbl">Balance del mes</div>
+    <div class="balance" id="balance">$0</div>
+    <div class="balance-note" id="balanceNote">Todavía no cargaste movimientos este mes.</div>
+
+    <div class="stats">
+      <div class="stat a"><div class="l">Ingresos</div><div class="v" id="vIng">$0</div></div>
+      <div class="stat b"><div class="l">Gastos</div><div class="v" id="vGas">$0</div></div>
+      <div class="stat c"><div class="l">Ahorro</div><div class="v" id="vAho">—</div></div>
+    </div>
+
+    <div class="rule"></div>
+
+    <h4 class="sec">Por pagar</h4>
+    <div class="add-pago">
+      <input class="full" id="pgDesc" type="text" maxlength="50" placeholder="Luz, alquiler, tarjeta…" aria-label="Qué hay que pagar">
+      <input id="pgMonto" type="number" min="0" step="0.01" inputmode="decimal" placeholder="Monto" aria-label="Monto">
+      <input id="pgVence" type="date" aria-label="Vence">
+      <select id="pgCat" aria-label="Categoría"></select>
+      <button class="btn" type="button" id="pgAdd">Agregar</button>
+    </div>
+    <div class="total-pagar" id="totalPagar" hidden><span>Te falta pagar</span><b id="totalPagarVal">$0</b></div>
+    <div id="pagos"></div>
+
+    <div class="rule"></div>
+
+    <h4 class="sec">
+      <span>Últimos seis meses</span>
+      <button class="linkbtn" type="button" id="toggleTable" aria-expanded="false">Ver tabla</button>
+    </h4>
+    <div class="chart-head">
+      <div class="legend">
+        <span><i class="dot ing"></i>Ingresos</span>
+        <span><i class="dot gas"></i>Gastos</span>
+      </div>
+    </div>
+    <div class="chart-wrap" id="chartWrap">
+      <div id="chart"></div>
+      <div class="tip" id="tip" role="status"></div>
+    </div>
+    <div id="tableView" hidden></div>
+
+    <div class="rule"></div>
+
+    <h4 class="sec">Gastos por categoría</h4>
+    <div id="cats"></div>
+
+    <div class="rule"></div>
+
+    <h4 class="sec">
+      <span>Movimientos</span>
+      <button class="linkbtn" type="button" id="openCats">Categorías</button>
+    </h4>
+    <div id="txs"></div>
+
+    <div class="actions">
+      <button class="btn" type="button" id="addIng">+ Ingreso</button>
+      <button class="btn" type="button" id="addGas">+ Gasto</button>
+    </div>
+
+    <div class="icons">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#09CDCD" d="M3 7.5A2.5 2.5 0 0 1 5.5 5H18a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V7.5Zm13 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3Z"/></svg>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#919BFF" d="M4 13h3.5v7H4v-7Zm6.2-6h3.6v13h-3.6V7ZM16.5 10H20v10h-3.5V10Z"/></svg>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#B57BEE" d="M7 3h10a2 2 0 0 1 2 2v15.2a.8.8 0 0 1-1.25.66L12 17.2l-5.75 3.66A.8.8 0 0 1 5 20.2V5a2 2 0 0 1 2-2Z"/></svg>
+    </div>
   </div>
 </div>
 
@@ -121,22 +192,12 @@
 <dialog id="dlgMov">
   <form class="sheet" method="dialog" id="formMov">
     <h3 id="movTitle">Nuevo movimiento</h3>
-    <div class="field">
-      <label for="fDesc">Descripción</label>
-      <input id="fDesc" name="desc" type="text" required maxlength="60" placeholder="Sueldo, Supermercado…">
-    </div>
-    <div class="field">
-      <label for="fMonto">Monto</label>
-      <input id="fMonto" name="monto" type="number" required min="0" step="0.01" inputmode="decimal" placeholder="0">
-    </div>
-    <div class="field">
-      <label for="fCat">Categoría</label>
-      <select id="fCat" name="cat"></select>
-    </div>
-    <div class="field">
-      <label for="fFecha">Fecha</label>
-      <input id="fFecha" name="fecha" type="date" required>
-    </div>
+    <div class="field"><label for="fDesc">Descripción</label>
+      <input id="fDesc" type="text" required maxlength="60" placeholder="Sueldo, Supermercado…"></div>
+    <div class="field"><label for="fMonto">Monto</label>
+      <input id="fMonto" type="number" required min="0" step="0.01" inputmode="decimal" placeholder="0"></div>
+    <div class="field"><label for="fCat">Categoría</label><select id="fCat"></select></div>
+    <div class="field"><label for="fFecha">Fecha</label><input id="fFecha" type="date" required></div>
     <div class="modal-actions">
       <button class="btn ghost" type="button" id="cancelMov">Cancelar</button>
       <button class="btn" type="submit">Guardar</button>
