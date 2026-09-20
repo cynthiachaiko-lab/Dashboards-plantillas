@@ -4,7 +4,7 @@ var SEMILLA = {"tareas": [{"id": "t01", "texto": "Poner a lavar la ropa", "minut
   "use strict";
 
   /* ═══════════ almacenamiento ═══════════ */
-  var KM='vl_mov_v1', KC='vl_cat_v1', KT='vl_tareas_v1', KP='vl_plan_v1', KD='vl_dias_v1', KG='vl_pagos_v1';
+  var KM='vl_mov_v1', KC='vl_cat_v1', KT='vl_tareas_v1', KP='vl_plan_v1', KD='vl_dias_v1', KG='vl_pagos_v1', KS='vl_compras_v1';
 
   function load(k, def){
     try{ var raw = localStorage.getItem(k); if(!raw) return def; var v = JSON.parse(raw); return (v === null || v === undefined) ? def : v; }
@@ -29,8 +29,10 @@ var SEMILLA = {"tareas": [{"id": "t01", "texto": "Poner a lavar la ropa", "minut
   var plan = load(KP, null);
   var dias = load(KD, {});
   var pagos = load(KG, []);
+  var compras = load(KS, []);
   if(!Array.isArray(tareas)){ tareas = (window.SEMILLA ? SEMILLA.tareas : []); plan = (window.SEMILLA ? SEMILLA.plan : null); }
   if(!Array.isArray(pagos)) pagos = [];
+  if(!Array.isArray(compras)) compras = [];
   if(!dias || typeof dias !== 'object') dias = {};
 
   /* ═══════════ utilidades ═══════════ */
@@ -751,7 +753,7 @@ var SEMILLA = {"tareas": [{"id": "t01", "texto": "Poner a lavar la ropa", "minut
     if(!docTodo) return;
     if(escribiendo){ pendiente=true; return; }
     escribiendo=true; sinConfirmar++;
-    docTodo.set({ tareas:tareas, plan:plan, dias:dias, pagos:pagos, movs:movs, cats:cats, actualizado:Date.now() }).then(function(){
+    docTodo.set({ tareas:tareas, plan:plan, dias:dias, pagos:pagos, compras:compras, movs:movs, cats:cats, actualizado:Date.now() }).then(function(){
       escribiendo=false; sinConfirmar=Math.max(0,sinConfirmar-1);
       if(pendiente){ pendiente=false; empujarDB(); }
       else if(!sinConfirmar) avisoSync('Sincronizado en tu cuenta de Claude.');
@@ -773,10 +775,11 @@ var SEMILLA = {"tareas": [{"id": "t01", "texto": "Poner a lavar la ropa", "minut
         if(d.plan) plan=d.plan;
         if(d.dias && typeof d.dias==='object') dias=d.dias;
         if(Array.isArray(d.pagos)) pagos=d.pagos;
+        if(Array.isArray(d.compras)) compras=d.compras;
         if(Array.isArray(d.movs)) movs=d.movs;
         if(d.cats && d.cats.gasto) cats=d.cats;
-        save(KT,tareas); save(KP,plan); save(KD,dias); save(KG,pagos); save(KM,movs); save(KC,cats);
-        renderTareas(); render();
+        save(KT,tareas); save(KP,plan); save(KD,dias); save(KG,pagos); save(KS,compras); save(KM,movs); save(KC,cats);
+        renderTareas(); renderCompras(); render();
       }else if(primera && tareas.length){ empujarDB(); }
       primera=false;
     }, function(){});
@@ -862,6 +865,246 @@ var SEMILLA = {"tareas": [{"id": "t01", "texto": "Poner a lavar la ropa", "minut
       btnOrganizar.textContent=(plan&&plan.bloques)?'Reordenar con IA':'Organizar con IA';
     }
   });
+
+  /* ═══════════ lista de compras ═══════════ */
+  /* Portada del panel de repuestos: sub-listas, prioridad con nombre al lado
+     del color, precios por lugar y comparación de la compra entera. */
+  var PRIOS = {
+    urgente:    { et:'Urgente',       color:'#dc2626', claro:'#f87171', rango:3 },
+    secundario: { et:'Secundario',    color:'#ea580c', claro:'#fb923c', rango:2 },
+    espera:     { et:'Puede esperar', color:'#ca8a04', claro:'#facc15', rango:1 }
+  };
+  var PRIO_ORDEN = ['urgente','secundario','espera'];
+  var prioNueva = 'secundario', grupoNuevo = '';
+
+  var elCompras = document.getElementById('compras');
+  var elCpOpts = document.getElementById('cpOpts');
+
+  function guardarCompras(){ save(KS, compras); empujarDB(); }
+  function compraDe(id){
+    for(var i=0;i<compras.length;i++){ if(compras[i].id===id) return compras[i]; }
+    return null;
+  }
+  function porPrioridad(a,b){
+    var ra = PRIOS[a.prioridad||'secundario'].rango, rb = PRIOS[b.prioridad||'secundario'].rango;
+    if(ra !== rb) return rb - ra;
+    return (a.creado||0) < (b.creado||0) ? -1 : 1;
+  }
+
+  /* Cuánto sale comprar TODA la lista en cada lugar, con cuántos productos
+     cubre: sin ese dato, el total más chico engaña. */
+  function totalesPorLugar(){
+    var pend = compras.filter(function(i){ return !i.hecho; });
+    var acum = {};
+    pend.forEach(function(item){
+      var mejor = {};
+      (item.precios||[]).forEach(function(q){
+        if(mejor[q.lugar] === undefined || q.precio < mejor[q.lugar]) mejor[q.lugar] = q.precio;
+      });
+      Object.keys(mejor).forEach(function(lugar){
+        if(!acum[lugar]) acum[lugar] = { total:0, cubre:0 };
+        acum[lugar].total += mejor[lugar];
+        acum[lugar].cubre += 1;
+      });
+    });
+    return {
+      aCotizar: pend.length,
+      lugares: Object.keys(acum).map(function(l){ return { lugar:l, total:acum[l].total, cubre:acum[l].cubre }; })
+        .sort(function(a,b){ return b.cubre !== a.cubre ? b.cubre - a.cubre : a.total - b.total; })
+    };
+  }
+
+  function tagPrio(p){
+    var i = PRIOS[p] || PRIOS.secundario;
+    return '<span class="tagp" data-prio style="background:' + i.color + '1f;color:' + i.claro +
+      ';border:1px solid ' + i.color + '55"><i style="background:' + i.color + '"></i>' + i.et + '</span>';
+  }
+
+  function filaCompra(it){
+    var p = PRIOS[it.prioridad] || PRIOS.secundario;
+    var precios = it.precios || [];
+    var barato = precios.length > 1 ? Math.min.apply(null, precios.map(function(q){ return q.precio; })) : null;
+
+    var chips = precios.map(function(q){
+      var es = barato !== null && q.precio === barato;
+      return '<span class="cotiz' + (es?' barato':'') + '"><span>' + esc(q.lugar) + '</span><b>' + plata(q.precio) + '</b>' +
+        '<button type="button" class="x" data-borrarprecio="' + q.id + '" aria-label="Borrar el precio de ' + esc(q.lugar) + '">✕</button></span>';
+    }).join('');
+
+    var zona = it.hecho ? '' :
+      '<div class="cp-precios">' + chips +
+      '<button type="button" class="cp-masprecio" data-masprecio>🏷 ' + (precios.length ? 'Otro lugar' : 'Agregar precio') + '</button>' +
+      (it.abriendo ?
+        '<div class="cp-formprecio">' +
+        '<input class="lugar" type="text" maxlength="24" placeholder="¿Dónde? (ej: Mercado A)" aria-label="Lugar">' +
+        '<input class="precio" type="number" min="0" step="0.01" inputmode="decimal" placeholder="Precio" aria-label="Precio">' +
+        '<button type="button" data-guardarprecio>Guardar</button></div>' : '') +
+      '</div>';
+
+    return '<div class="cp-item' + (it.hecho?' ok':'') + '" data-compra="' + it.id + '" style="border-color:' +
+      (it.hecho ? 'rgba(255,255,255,.06)' : p.color + '44') + ';background-image:' +
+      (it.hecho ? 'none' : 'linear-gradient(90deg,' + p.color + '14, transparent 45%)') + '">' +
+      '<div class="cp-fila">' +
+      '<button type="button" class="cp-tick" data-tickcompra role="checkbox" aria-checked="' + (it.hecho?'true':'false') +
+      '" aria-label="' + esc(it.texto) + '" style="border:1px solid ' + (it.hecho?'rgba(255,255,255,.25)':p.color) +
+      ';background:' + (it.hecho?'rgba(255,255,255,.12)':'transparent') + ';color:' + (it.hecho?'#fff':'transparent') + '">✓</button>' +
+      '<span class="cp-txt">' + esc(it.texto) + '</span>' +
+      (it.hecho ? '' : tagPrio(it.prioridad)) +
+      '<button type="button" class="del" data-borrarcompra aria-label="Borrar ' + esc(it.texto) + '">✕</button>' +
+      '</div>' + zona + '</div>';
+  }
+
+  function renderCompras(){
+    /* botones de prioridad del formulario */
+    document.getElementById('cpPrios').innerHTML = PRIO_ORDEN.map(function(p){
+      var i = PRIOS[p], act = (prioNueva === p);
+      return '<button type="button" data-setprio="' + p + '" style="' +
+        (act ? 'background:' + i.color + '26;border-color:' + i.color + ';color:' + i.claro : '') + '">' + i.et + '</button>';
+    }).join('');
+
+    var grupos = [];
+    compras.forEach(function(i){ if(i.grupo && grupos.indexOf(i.grupo) < 0) grupos.push(i.grupo); });
+    document.getElementById('cp-grupos').innerHTML = grupos.sort().map(function(g){
+      return '<option value="' + esc(g) + '"></option>';
+    }).join('');
+
+    var pend = compras.filter(function(i){ return !i.hecho; }).length;
+    document.getElementById('comprasMeta').textContent = compras.length
+      ? pend + ' sin comprar de ' + compras.length
+      : '';
+
+    if(!compras.length){
+      elCompras.innerHTML = '<div class="empty">La lista está vacía. Escribí arriba lo que haya que comprar.</div>';
+      return;
+    }
+
+    /* agrupado por sub-lista; "Sin agrupar" al final */
+    var mapa = {}, orden = [];
+    compras.forEach(function(it){
+      var k = it.grupo || 'Sin agrupar';
+      if(!mapa[k]){ mapa[k] = []; orden.push(k); }
+      mapa[k].push(it);
+    });
+    orden.sort(function(a,b){
+      if(a === 'Sin agrupar') return 1;
+      if(b === 'Sin agrupar') return -1;
+      return a.localeCompare(b);
+    });
+
+    var html = orden.map(function(k){
+      var lista = mapa[k].slice().sort(function(a,b){
+        return (a.hecho !== b.hecho) ? (a.hecho ? 1 : -1) : porPrioridad(a,b);
+      });
+      return '<div class="cp-grupo"><div class="cp-grupo-t">' + esc(k) + '</div>' +
+        lista.map(filaCompra).join('') + '</div>';
+    }).join('');
+
+    /* comparación de la compra entera */
+    var cmp = totalesPorLugar();
+    if(cmp.lugares.length){
+      var completos = cmp.lugares.filter(function(l){ return l.cubre === cmp.aCotizar; });
+      var masBarato = completos.length > 1 ? Math.min.apply(null, completos.map(function(l){ return l.total; })) : null;
+      html += '<div class="comparativa"><h5>Cuánto sale la lista en cada lugar</h5>' +
+        cmp.lugares.map(function(l){
+          var completo = l.cubre === cmp.aCotizar;
+          var gana = masBarato !== null && completo && l.total === masBarato;
+          return '<div class="cmp-fila"><span class="lug">' + esc(l.lugar) +
+            '<span class="cubre"> · cubre ' + l.cubre + ' de ' + cmp.aCotizar + '</span></span>' +
+            '<span class="tot' + (gana ? ' gana' : (completo ? '' : ' incompleto')) + '">' + plata(l.total) + '</span></div>';
+        }).join('') +
+        '<p class="cmp-nota">' + (completos.length > 1
+          ? 'En turquesa, el más barato entre los que tienen precio de todo. Los que cubren menos cosas dan un total más chico porque les faltan productos, no porque sean más baratos.'
+          : 'Para comparar de igual a igual hace falta el precio de todos los productos en cada lugar: al que le falta alguno da un total más chico por eso, no por ser más barato.') +
+        '</p><p class="cmp-nota">Este cuadro no toca ningún otro número del panel.</p></div>';
+    }
+
+    elCompras.innerHTML = html;
+
+    /* oyentes fila por fila (en iPhone el toque no siempre sube al contenedor) */
+    var filas = elCompras.querySelectorAll('[data-compra]');
+    for(var i=0;i<filas.length;i++){
+      (function(fila){
+        var id = fila.getAttribute('data-compra');
+        fila.addEventListener('click', function(ev){
+          var t = ev.target;
+          if(t.closest('[data-borrarcompra]')){
+            compras = compras.filter(function(x){ return x.id !== id; });
+            guardarCompras(); renderCompras(); return;
+          }
+          if(t.closest('[data-prio]')){
+            var it = compraDe(id);
+            if(it){
+              var k = PRIO_ORDEN.indexOf(it.prioridad);
+              it.prioridad = PRIO_ORDEN[(k + 1) % PRIO_ORDEN.length];
+              guardarCompras(); renderCompras();
+            }
+            return;
+          }
+          if(t.closest('[data-borrarprecio]')){
+            var qid = t.closest('[data-borrarprecio]').getAttribute('data-borrarprecio');
+            var it2 = compraDe(id);
+            if(it2){
+              it2.precios = (it2.precios||[]).filter(function(q){ return q.id !== qid; });
+              guardarCompras(); renderCompras();
+            }
+            return;
+          }
+          if(t.closest('[data-masprecio]')){
+            var it3 = compraDe(id);
+            compras.forEach(function(x){ x.abriendo = false; });
+            if(it3) it3.abriendo = true;
+            renderCompras();
+            var inp = elCompras.querySelector('[data-compra="' + id + '"] .lugar');
+            if(inp) inp.focus();
+            return;
+          }
+          if(t.closest('[data-guardarprecio]')){
+            var cont = fila.querySelector('.cp-formprecio');
+            var lugar = cont.querySelector('.lugar').value.trim();
+            var precio = parseFloat(cont.querySelector('.precio').value);
+            if(!lugar || !(precio > 0)){ alert('Poné dónde y cuánto.'); return; }
+            var it4 = compraDe(id);
+            if(it4){
+              it4.precios = (it4.precios||[]).concat([{ id:uid(), lugar:lugar, precio:precio }]);
+              it4.abriendo = false;
+              guardarCompras(); renderCompras();
+            }
+            return;
+          }
+          if(t.closest('.cp-formprecio')) return;
+          var it5 = compraDe(id);
+          if(it5){ it5.hecho = !it5.hecho; it5.abriendo = false; guardarCompras(); renderCompras(); }
+        });
+      })(filas[i]);
+    }
+  }
+
+  document.getElementById('cpPrios').addEventListener('click', function(e){
+    var b = e.target.closest('[data-setprio]');
+    if(!b) return;
+    prioNueva = b.getAttribute('data-setprio');
+    renderCompras();
+  });
+  document.getElementById('cpGrupo').addEventListener('change', function(){ grupoNuevo = this.value.trim(); });
+  document.getElementById('cpTexto').addEventListener('focus', function(){ elCpOpts.hidden = false; });
+
+  function agregarCompra(){
+    var i = document.getElementById('cpTexto');
+    var v = i.value.trim();
+    if(!v) return;
+    grupoNuevo = document.getElementById('cpGrupo').value.trim();
+    compras.push({ id:uid(), texto:v, grupo:grupoNuevo, prioridad:prioNueva, hecho:false, precios:[], creado:Date.now() });
+    i.value = '';
+    guardarCompras();
+    renderCompras();
+    i.focus();   /* el grupo y la prioridad quedan puestos: normalmente van varios seguidos */
+  }
+  document.getElementById('cpAdd').addEventListener('click', agregarCompra);
+  document.getElementById('cpTexto').addEventListener('keydown', function(e){
+    if(e.key === 'Enter'){ e.preventDefault(); agregarCompra(); }
+  });
+
+  renderCompras();
 
   renderTareas();
   renderPagos();

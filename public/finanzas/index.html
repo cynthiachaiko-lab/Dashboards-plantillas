@@ -83,6 +83,21 @@
   <div class="ia-nota" id="iaNota" hidden></div>
   <div id="tareas"></div>
 
+  <div class="rule"></div>
+
+  <h4 class="sec">Lista de compras</h4>
+  <div class="compras-meta" id="comprasMeta"></div>
+  <div class="cp-add">
+    <input id="cpTexto" type="text" maxlength="60" placeholder="Agregar algo a la lista…" aria-label="Qué comprar">
+    <button type="button" id="cpAdd" aria-label="Agregar">+</button>
+  </div>
+  <div class="cp-opts" id="cpOpts" hidden>
+    <div class="cp-prios" id="cpPrios"></div>
+    <input class="grupo" id="cpGrupo" type="text" maxlength="24" list="cp-grupos" placeholder="Sub-lista (ej: Verdulería, Farmacia)" aria-label="Sub-lista">
+    <datalist id="cp-grupos"></datalist>
+  </div>
+  <div id="compras"></div>
+
   <div class="actions">
     <button class="btn ghost" type="button" id="btnCopiar">Copiar para Claude</button>
     <button class="btn ghost" type="button" id="btnPegar">Pegar de Claude</button>
