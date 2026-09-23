@@ -95,7 +95,7 @@
     box-shadow:0 0 0 1.5px rgba(255,255,255,.22), 0 0 22px -4px rgba(190,120,255,.85);
   }
   .head .name{ font-family:var(--serif); font-size:1.5rem; font-weight:500; color:#BFD4FF; }
-  .head .sub{ font-size:.86rem; font-weight:500; color:rgba(200,190,245,.62); margin-top:1px; }
+  .head .pend{ font-size:.86rem; font-weight:500; color:rgba(200,190,245,.62); margin-top:1px; }
   .nav{ margin-left:auto; display:flex; align-items:center; gap:6px; }
   .navbtn{
     width:36px; height:36px; border-radius:12px; cursor:pointer;
@@ -220,6 +220,64 @@
     color:rgba(205,163,255,.85); opacity:.6; transition:.18s; flex-shrink:0;
   }
   .del:hover{ opacity:1; border-color:rgba(205,163,255,.6); }
+
+  /* ── pendientes adentro de una tarea ── */
+  .pend-add{
+    width:26px; height:26px; border-radius:9px; cursor:pointer; font-family:inherit; flex-shrink:0;
+    display:flex; align-items:center; justify-content:center; font-size:.76rem; font-weight:800; line-height:1;
+    background:rgba(145,155,255,.14); border:1px solid rgba(145,155,255,.4); color:#BFC4FF;
+    touch-action:manipulation; -webkit-tap-highlight-color:transparent;
+  }
+  .pend-add.hay{ background:linear-gradient(150deg, rgba(9,205,205,.32), rgba(181,123,238,.32)); color:var(--ink-1); }
+  .conjunto{ border-bottom:1px solid rgba(255,255,255,.09); }
+  .conjunto .task{ border-bottom:none; }
+  .pends{ margin:0 0 4px 14px; padding:2px 0 6px 14px; border-left:1px solid rgba(145,155,255,.35); }
+  .pend{
+    display:grid; grid-template-columns:23px minmax(0,1fr) 24px;
+    column-gap:10px; row-gap:7px; align-items:center;
+    padding:9px 0; font-size:.86rem; font-weight:600;
+    cursor:pointer; user-select:none;
+    touch-action:manipulation; -webkit-tap-highlight-color:transparent;
+  }
+  .pend .tick{ grid-column:1; grid-row:1; }
+  .pend .txt{ grid-column:2; grid-row:1; }
+  .pend .del{ grid-column:3; grid-row:1; }
+  .pend .chips{ grid-column:2; grid-row:2; display:flex; gap:6px; flex-wrap:wrap; }
+  .pend .tick{ width:23px; height:23px; border-radius:8px; font-size:.7rem; border-color:rgba(145,155,255,.6); }
+  .pend.ok .tick{
+    background:linear-gradient(150deg,var(--series-ing-alto),var(--series-ing));
+    border-color:transparent; color:#0B2B33;
+  }
+  .pend .txt{ min-width:0; overflow-wrap:anywhere; }
+  .pend.ok .txt{ color:var(--ink-3); text-decoration:line-through; }
+  .pend.otro-dia .txt{ color:var(--ink-3); }
+  .pend .del{ width:24px; height:24px; border-radius:8px; font-size:.78rem; }
+  .pend-chip{
+    font-size:.64rem; font-weight:800; letter-spacing:.04em; flex-shrink:0; cursor:pointer;
+    font-family:var(--sans); padding:4px 9px; border-radius:20px; line-height:1;
+    background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.16); color:var(--ink-2);
+  }
+  .pend-chip.hora{
+    background:linear-gradient(150deg,var(--series-ing-alto),var(--series-ing));
+    color:#0B2B33; border-color:transparent;
+  }
+  .pend-chip.dia{ border-color:rgba(145,155,255,.45); color:#BFC4FF; }
+  .pends-tot{
+    font-size:.62rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--ink-3); margin-top:8px;
+  }
+  .add-pend{ display:flex; gap:8px; margin-top:8px; }
+  .add-pend input{
+    flex:1; min-width:0; font-family:inherit; font-size:.85rem; font-weight:600; color:var(--ink-1);
+    background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.14);
+    border-radius:12px; padding:9px 12px;
+  }
+  .add-pend input:focus{ outline:none; border-color:rgba(145,155,255,.7); }
+  .add-pend button{
+    flex-shrink:0; width:38px; border-radius:12px; font-family:inherit; font-size:1rem; cursor:pointer;
+    background:linear-gradient(150deg, rgba(9,205,205,.3), rgba(181,123,238,.3));
+    border:1px solid rgba(255,255,255,.18); color:var(--ink-1);
+  }
 
   .tareas-meta{ display:flex; align-items:center; gap:12px; font-size:.8rem; font-weight:600; color:var(--ink-3); margin-bottom:14px; }
   .barrita{ flex:1; height:6px; border-radius:6px; background:rgba(255,255,255,.07); overflow:hidden; }
