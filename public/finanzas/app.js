@@ -218,7 +218,7 @@ var SEMILLA = {"tareas": [{"id": "t01", "texto": "Poner a lavar la ropa", "minut
         }
       }
       html += '<div class="pend'+(hs?' ok':'')+(propio?'':' otro-dia')+'" data-fila="'+s.id+'">'+
-        '<button type="button" class="tick" role="checkbox" aria-checked="'+(hs?'true':'false')+'" aria-label="'+esc(s.texto)+'">✓</button>'+
+        '<button type="button" class="tick" data-tick="'+s.id+'" role="checkbox" aria-checked="'+(hs?'true':'false')+'" aria-label="'+esc(s.texto)+'">✓</button>'+
         '<span class="txt">'+esc(s.texto)+'</span>'+
         '<div class="chips">'+
         (hs ? '<button type="button" class="pend-chip hora" data-hora="'+s.id+'">'+esc(hs)+'</button>'
@@ -311,6 +311,35 @@ var SEMILLA = {"tareas": [{"id": "t01", "texto": "Poner a lavar la ropa", "minut
       partes.push('Trabajaste ' + minutosTxt(td) + '.');
     }
     document.getElementById('jNota').textContent = partes.join(' ');
+
+    var elAl = document.getElementById('jAlerta');
+    if(esTarde(r.acostada)){
+      var racha = rachaTrasnoche(diaVisto);
+      var txt = 'Te acostaste ' + r.acostada + ', de madrugada.';
+      if(racha >= 2) txt += ' Van <b>' + racha + ' noches seguidas</b> así.';
+      document.getElementById('jAlertaTxt').innerHTML = txt;
+      elAl.hidden = false;
+    }else{
+      elAl.hidden = true;
+    }
+  }
+
+  /* ── trasnoche: entre 00:00 y 05:59 cuenta como "de madrugada" ── */
+  function esTarde(hhmm){
+    var m = aMin(hhmm);
+    return m !== null && m < 360;
+  }
+  function rachaTrasnoche(fecha){
+    var n = 0, f = fecha;
+    while(true){
+      var r = dias[f];
+      if(!r || !r.acostada || !esTarde(r.acostada)) break;
+      n++;
+      var d = deIso(f);
+      d.setDate(d.getDate() - 1);
+      f = iso(d);
+    }
+    return n;
   }
 
   function renderTareas(){
@@ -387,10 +416,62 @@ var SEMILLA = {"tareas": [{"id": "t01", "texto": "Poner a lavar la ropa", "minut
 
   function alternar(id){
     var r = reg(diaVisto);
-    if(r.hechas[id]) delete r.hechas[id];
+    var marcando = !r.hechas[id];
+    if(!marcando) delete r.hechas[id];
     else r.hechas[id] = (diaVisto === iso(new Date())) ? ahoraHHMM() : '12:00';
     guardarDias();
+    var origen = marcando ? document.querySelector('[data-tick="'+id+'"]') : null;
     renderTareas();
+    if(marcando) festejar(id, origen);
+  }
+
+  /* ── festejo al marcar algo como hecho, con más fiesta si es del trabajo ── */
+  var FRASES_QUE = ['¡Una menos! ✓','Ahí va, sumando.','Bien ahí.','Eso quedó listo.','Un paso más del día.'];
+  var FRASES_TRABAJO = ['¡Eso! Un pendiente del trabajo, hecho. 💜','Avanzaste la compu — seguí así.','Un ítem menos en tu bloque de trabajo.','Bien ahí, profesional.','Eso suma para tu semana.'];
+
+  function esDelTrabajo(id){
+    var par = subDe(id);
+    if(par && par.padre) return esDeBloqueTrabajo(par.padre.id);
+    return esDeBloqueTrabajo(id);
+  }
+  function esDeBloqueTrabajo(idTarea){
+    if(!plan || !plan.bloques) return false;
+    for(var i=0;i<plan.bloques.length;i++){
+      var b = plan.bloques[i];
+      if(b.trabajo && (b.ids||[]).indexOf(idTarea) !== -1) return true;
+    }
+    return false;
+  }
+
+  function festejar(id, origen){
+    var trabajo = esDelTrabajo(id);
+    var frases = trabajo ? FRASES_TRABAJO : FRASES_QUE;
+    var msg = frases[Math.floor(Math.random() * frases.length)];
+
+    var el = document.getElementById('logroToast');
+    el.textContent = msg;
+    el.className = 'logro on' + (trabajo ? ' trabajo' : '');
+    clearTimeout(el._t);
+    el._t = setTimeout(function(){ el.className = 'logro' + (trabajo ? ' trabajo' : ''); }, 1900);
+
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(reduce || !origen) return;
+    var rect = origen.getBoundingClientRect();
+    var cx = rect.left + rect.width/2, cy = rect.top + rect.height/2;
+    var colores = trabajo ? ['#D3A8FF','#B57BEE','#919BFF'] : ['#09CDCD','#A0E5D9','#99F2D1'];
+    var n = trabajo ? 18 : 10;
+    for(var i=0;i<n;i++){
+      var p = document.createElement('div');
+      p.className = 'confeti';
+      var ang = Math.random()*Math.PI*2, dist = 40 + Math.random()*70;
+      p.style.left = cx+'px'; p.style.top = cy+'px';
+      p.style.background = colores[i % colores.length];
+      p.style.setProperty('--dx', (Math.cos(ang)*dist)+'px');
+      p.style.setProperty('--dy', (Math.sin(ang)*dist - 30)+'px');
+      p.style.setProperty('--rot', (Math.random()*360-180)+'deg');
+      document.body.appendChild(p);
+      (function(node){ setTimeout(function(){ node.remove(); }, 950); })(p);
+    }
   }
 
   function editarHora(id){
