@@ -255,6 +255,15 @@
   }
   .del:hover{ opacity:1; border-color:rgba(205,163,255,.6); }
 
+  /* ── día fijo de una tarea ── */
+  .dia-chip{
+    font-size:.64rem; font-weight:800; letter-spacing:.04em; flex-shrink:0; cursor:pointer;
+    font-family:var(--sans); padding:4px 9px; border-radius:20px; line-height:1;
+    background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.16); color:var(--ink-3);
+    touch-action:manipulation; -webkit-tap-highlight-color:transparent;
+  }
+  .dia-chip.fijo{ border-color:rgba(145,155,255,.45); color:#BFC4FF; background:rgba(145,155,255,.12); }
+
   /* ── pendientes adentro de una tarea ── */
   .pend-add{
     width:26px; height:26px; border-radius:9px; cursor:pointer; font-family:inherit; flex-shrink:0;
