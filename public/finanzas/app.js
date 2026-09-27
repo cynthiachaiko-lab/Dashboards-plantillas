@@ -1,4 +1,4 @@
-var SEMILLA = {"tareas": [{"id": "t01", "texto": "Poner a lavar la ropa", "minutos": 10, "creado": 1}, {"id": "t04", "texto": "Podar las palmeras", "minutos": 60, "creado": 2}, {"id": "t05", "texto": "Palear abono", "minutos": 45, "creado": 3}, {"id": "t07", "texto": "Correr las suculentas de su pisito", "minutos": 10, "creado": 4}, {"id": "t08", "texto": "Lavar el garaje (el grande)", "minutos": 90, "creado": 5}, {"id": "t09", "texto": "Lavar el piso del frente (el chico)", "minutos": 35, "creado": 6}, {"id": "t10", "texto": "Lavar el pisito de las suculentas", "minutos": 15, "creado": 7}, {"id": "t12", "texto": "Reubicar las suculentas según el sol de la temporada", "minutos": 25, "creado": 8}, {"id": "t13", "texto": "Plantas: las 2 del frente", "minutos": 20, "creado": 9}, {"id": "t14", "texto": "Plantas: el jengibre", "minutos": 15, "creado": 10}, {"id": "t15", "texto": "Regar todas las plantas", "minutos": 20, "creado": 11}, {"id": "t16", "texto": "Baba: poner a lavar sus sábanas", "minutos": 10, "creado": 12}, {"id": "t17", "texto": "Baba: pasar el trapo a la galería", "minutos": 30, "creado": 13}, {"id": "t18", "texto": "Baba: ordenar la cama", "minutos": 10, "creado": 14}, {"id": "t19", "texto": "Baba: sacar verduras", "minutos": 20, "creado": 15}, {"id": "t20", "texto": "Ir a la verdulería", "minutos": 30, "creado": 16}, {"id": "t21", "texto": "Limpiar el polvo del modular de la sala", "minutos": 30, "creado": 17}, {"id": "t22", "texto": "Lavar los platos y ordenar la cocina", "minutos": 30, "creado": 18}, {"id": "t24", "texto": "Barrer la cocina", "minutos": 10, "creado": 19}, {"id": "t25", "texto": "Trabajar 4 a 6 hs en la compu", "minutos": 300, "creado": 20, "subs": []}, {"id": "t26", "texto": "Ayudar a Mau con su cel", "minutos": 20, "creado": 21}, {"id": "mudga0csnnibj", "texto": "Ordenar y limpiar lavadero", "minutos": 25, "creado": 22}, {"id": "mudgam72mpnq3", "texto": "Podar arbustos", "minutos": 40, "creado": 23}], "plan": {"nota": "Son unas 9 horas de tareas más tu bloque de compu: no entra en un día, va en dos jornadas. Lo de la compu ahora se abre: metele adentro cada pendiente con su día y sus minutos, y el plan te los ordena entre las horas que trabajás.", "bloques": [{"titulo": "Anoche, antes de dormir", "motivo": "La dejás girando y al amanecer ya está para colgar.", "jornada": 1, "ancla": "noche", "trabajo": false, "ids": ["t01"]}, {"titulo": "Ensuciá antes de lavar", "motivo": "La poda de las palmeras y de los arbustos tira todo al piso, y el abono también: si lavás primero, lavás dos veces.", "jornada": 1, "ancla": null, "trabajo": false, "ids": ["t04", "mudgam72mpnq3", "t05"]}, {"titulo": "Sacá las suculentas", "motivo": "Un minuto ahora te evita frenar con la manguera en la mano.", "jornada": 1, "ancla": null, "trabajo": false, "ids": ["t07"]}, {"titulo": "Manguera: de grande a chico", "motivo": "Una sola conexión: el garaje que más tarda, después el frente y el pisito.", "jornada": 1, "ancla": null, "trabajo": false, "ids": ["t08", "t09", "t10"]}, {"titulo": "Al atardecer, las plantas", "motivo": "Sin sol fuerte no se queman: las trabajás, reubicás las suculentas y regás todo al final.", "jornada": 1, "ancla": "18:30", "trabajo": false, "ids": ["t13", "t14", "t12", "t15"]}, {"titulo": "Segundo día: salí una vez", "motivo": "En lo de Baba arrancás por el lavarropas y hacés el resto mientras corre; la verdulería, de paso a la vuelta.", "jornada": 2, "ancla": "09:30", "trabajo": false, "ids": ["t16", "t17", "t18", "t19", "t20"]}, {"titulo": "El modular, de una", "motivo": "La que venís pateando: sacala apenas volvés, antes de sentarte.", "jornada": 2, "ancla": null, "trabajo": false, "ids": ["t21"]}, {"titulo": "Cerrá la cocina de arriba abajo", "motivo": "Primero la pileta y recién al final el piso, para barrer lo que cayó de todo lo anterior.", "jornada": 2, "ancla": null, "trabajo": false, "ids": ["t22", "t24"]}, {"titulo": "El lavadero, de paso", "motivo": "Ya estás con el trapo en la mano y la ropa de anoche salió: ordenás y limpiás en la misma vuelta.", "jornada": 2, "ancla": null, "trabajo": false, "ids": ["mudga0csnnibj"]}, {"titulo": "Bloque de compu intocable", "motivo": "Con la casa cerrada nadie te interrumpe: esas horas necesitan la cabeza entera.", "jornada": 2, "ancla": null, "trabajo": true, "ids": ["t25"]}, {"titulo": "Cuando Mau esté disponible", "motivo": "Depende de otra persona: no lo pongas en el camino crítico.", "jornada": 2, "ancla": null, "trabajo": false, "ids": ["t26"]}]}};
+var SEMILLA = {"tareas": [{"id": "t01", "texto": "Poner a lavar la ropa", "minutos": 10, "creado": 1, "dia": null}, {"id": "t04", "texto": "Podar las palmeras", "minutos": 60, "creado": 2, "dia": 6}, {"id": "t05", "texto": "Palear abono", "minutos": 45, "creado": 3, "dia": 0}, {"id": "t07", "texto": "Correr las suculentas de su pisito", "minutos": 10, "creado": 4, "dia": 0}, {"id": "t08", "texto": "Lavar el garaje (el grande)", "minutos": 90, "creado": 5, "dia": 0}, {"id": "t10", "texto": "Lavar el pisito de las suculentas", "minutos": 15, "creado": 6, "dia": 0}, {"id": "t12", "texto": "Reubicar las suculentas según el sol de la temporada", "minutos": 25, "creado": 7, "dia": 0}, {"id": "t15", "texto": "Regar todas las plantas", "minutos": 20, "creado": 8, "dia": 0}, {"id": "t16", "texto": "Baba: poner a lavar sus sábanas", "minutos": 10, "creado": 9, "dia": 6}, {"id": "t17", "texto": "Baba: pasar el trapo a la galería", "minutos": 30, "creado": 10, "dia": 6}, {"id": "t18", "texto": "Baba: ordenar la cama", "minutos": 10, "creado": 11, "dia": 6}, {"id": "t19", "texto": "Baba: sacar verduras", "minutos": 20, "creado": 12, "dia": 6}, {"id": "t20", "texto": "Ir a la verdulería", "minutos": 30, "creado": 13, "dia": 6}, {"id": "t21", "texto": "Limpiar el polvo del modular de la sala", "minutos": 30, "creado": 14, "dia": 1}, {"id": "t22", "texto": "Lavar los platos y ordenar la cocina", "minutos": 30, "creado": 15, "dia": null}, {"id": "t24", "texto": "Barrer la cocina", "minutos": 10, "creado": 16, "dia": null}, {"id": "t26", "texto": "Ayudar a Mau con su cel", "minutos": 20, "creado": 17, "dia": null}, {"id": "mudga0csnnibj", "texto": "Ordenar y limpiar lavadero", "minutos": 25, "creado": 18, "dia": 2}, {"id": "mudgam72mpnq3", "texto": "Podar arbustos", "minutos": 40, "creado": 19, "dia": 6}, {"id": "muflycr1aynj4", "texto": "Podar el pasto", "minutos": 45, "creado": 20, "dia": 6}, {"id": "mugc0kekt9253", "texto": "Contadora", "minutos": 30, "creado": 21, "dia": null}, {"id": "mugerl7thl6ct", "texto": "Cargar en el auto ropa para la modista", "minutos": 10, "creado": 22, "dia": null}, {"id": "pdpqwz8z", "texto": "Aseo personal, desayuno completo e hidratación", "minutos": 45, "dia": null, "creado": 23}, {"id": "wk00k2xf3", "texto": "Ver tutorial: cómo se arma el sistema gráfico para cada cliente y el propio", "minutos": 30, "dia": 1, "creado": 24}, {"id": "wk01egfh1", "texto": "Corregir Tejo", "minutos": 45, "dia": 1, "creado": 25}, {"id": "wk04e13u0", "texto": "Armar sistema gráfico para Instagram: Shine y CM", "minutos": 90, "dia": 2, "creado": 26}, {"id": "wk06993ir", "texto": "Ver qué onda OmniMarca", "minutos": 30, "dia": 2, "creado": 27}, {"id": "wk07265sb", "texto": "Ver recursos: cómo se hacen los bots de mensajes", "minutos": 30, "dia": 3, "creado": 28}, {"id": "wk09mc9p1", "texto": "Configurar bot para WhatsApp", "minutos": 45, "dia": 4, "creado": 29}, {"id": "pd2o6r2s", "texto": "Planificación visual de tareas de la semana", "minutos": 90, "dia": 0, "creado": 30}, {"id": "wk028bzr1", "texto": "Contactar al posible cliente", "minutos": 20, "dia": 1, "creado": 31}, {"id": "wk03frn7r", "texto": "Crear Instagram de CM", "minutos": 15, "dia": 1, "creado": 32}, {"id": "wk05z5gp9", "texto": "Empezar a publicar en Instagram de Shine", "minutos": 40, "dia": 2, "creado": 33}, {"id": "wk08yri1v", "texto": "Automatizar publicaciones y gestionar esa automatización para Shine", "minutos": 60, "dia": 3, "creado": 34}, {"id": "wk108a68f", "texto": "Bot de DM para Shine y para WhatsApp", "minutos": 60, "dia": 4, "creado": 35}, {"id": "pdqu2y5i", "texto": "Almuerzo consciente sin pantallas ni trabajo", "minutos": 90, "dia": null, "creado": 36}, {"id": "pda63l5a", "texto": "Ducha caliente, cena liviana y luces bajas", "minutos": 120, "dia": null, "creado": 37}, {"id": "pdqfg0h5", "texto": "Entrega y toma de medicación recetada + actividad de bajo estímulo", "minutos": 60, "dia": null, "creado": 38}, {"id": "pdig7pbr", "texto": "Apagado de pantallas e ir a la cama", "minutos": 30, "dia": null, "creado": 39}], "plan": {"nota": "Itinerario de Patología Dual con dos anclas clínicas fijas: la medicación a las 19hs (la única del día) y el descanso a las 22hs. El fin de semana quedó repartido: sábado salida y poda, domingo agua y plantas.", "bloques": [{"titulo": "Inicio de Jornada", "motivo": "Rutina, y apenas te pongas con tareas: la modista y la contadora primero, como pediste.", "jornada": 1, "ancla": "08:30", "trabajo": false, "ids": ["pdpqwz8z", "mugerl7thl6ct", "mugc0kekt9253"]}, {"titulo": "Freelance Mañana", "motivo": "El bloque de más concentración, con lo real que ya tenías pendiente: tutorial, Tejo, sistema gráfico, investigación y bots.", "jornada": 1, "ancla": "09:15", "trabajo": true, "ids": ["wk00k2xf3", "wk01egfh1", "wk04e13u0", "wk06993ir", "wk07265sb", "wk09mc9p1", "pd2o6r2s"]}, {"titulo": "Almuerzo", "motivo": "Sin pantalla ni trabajo en el medio.", "jornada": 1, "ancla": "12:30", "trabajo": false, "ids": ["pdqu2y5i"]}, {"titulo": "Freelance Tarde", "motivo": "Gestión, entregas y correos: contactar clientes, publicar, automatizar.", "jornada": 1, "ancla": "14:00", "trabajo": true, "ids": ["wk028bzr1", "wk03frn7r", "wk05z5gp9", "wk08yri1v", "wk108a68f"]}, {"titulo": "Quehaceres / Cierre", "motivo": "Sábado: la salida única (lo de Baba y la verdulería, que domingo está cerrada) y toda la poda. Domingo: nada comercial, puro casa — abono, manguera de grande a chico y las plantas al final. Fin de semana lo podés correr a la mañana.", "jornada": 1, "ancla": "17:30", "trabajo": false, "ids": ["t16", "t17", "t18", "t19", "t20", "t04", "mudgam72mpnq3", "muflycr1aynj4", "t05", "t07", "t08", "t10", "t12", "t15", "t21", "mudga0csnnibj", "t22", "t24", "t26"]}, {"titulo": "Medicación Nocturna", "motivo": "Ancla clínica crítica, la única del día: 19hs, no se corre por nada.", "jornada": 1, "ancla": "19:00", "trabajo": false, "ids": ["pdqfg0h5"]}, {"titulo": "Cena y Desactivación", "motivo": "Ducha, cena liviana y luces bajas, apenas termina la medicación; la ropa de la noche va acá, en el mismo tramo de bajar un cambio.", "jornada": 1, "ancla": null, "trabajo": false, "ids": ["pda63l5a", "t01"]}, {"titulo": "Descanso", "motivo": "Ancla clínica crítica: pantallas apagadas y a la cama.", "jornada": 1, "ancla": "22:00", "trabajo": false, "ids": ["pdig7pbr"]}]}};
 
 (function(){
   "use strict";
@@ -108,8 +108,7 @@ var SEMILLA = {"tareas": [{"id": "t01", "texto": "Poner a lavar la ropa", "minut
     return (b.ids||[]).reduce(function(a,id){
       var t = tareaDe(id);
       if(!t || !esDeHoy(t)) return a;
-      /* si la tarea tiene pendientes adentro, manda lo que de verdad hay para hoy */
-      return a + Math.max(t.minutos||0, minutosSubsHoy(t));
+      return a + (t.minutos||0);
     },0);
   }
 
@@ -168,138 +167,21 @@ var SEMILLA = {"tareas": [{"id": "t01", "texto": "Poner a lavar la ropa", "minut
   }
   function hechaEn(id){ return reg(diaVisto).hechas[id] || null; }
 
-  /* ── pendientes adentro de una tarea (por ejemplo, lo de la compu) ── */
-  var abiertos = {};
-
-  function subsDe(t){ return (t && t.subs && t.subs.length) ? t.subs : []; }
+  /* ── el día que se mira en las pestañas decide qué tareas se ven ── */
   function diaSemana(){ return deIso(diaVisto).getDay(); }
-  function esDeHoy(s){ return (s.dia === null || s.dia === undefined || s.dia === diaSemana()); }
-  function minutosSubsHoy(t){
-    return subsDe(t).reduce(function(a,s){ return a + (esDeHoy(s) ? (s.minutos||0) : 0); }, 0);
-  }
-  function subDe(id){
-    for(var i=0;i<tareas.length;i++){
-      var ss = subsDe(tareas[i]);
-      for(var j=0;j<ss.length;j++){ if(ss[j].id===id) return { padre:tareas[i], sub:ss[j] }; }
-    }
-    return null;
-  }
+  function esDeHoy(t){ return (t.dia === null || t.dia === undefined || t.dia === diaSemana()); }
 
-  function filaTarea(t, h){
+  function filaTarea(t){
     var hh = hechaEn(t.id);
-    var subs = subsDe(t);
-    var deHoy = subs.filter(esDeHoy);
-    var pend = deHoy.filter(function(s){ return !hechaEn(s.id); }).length;
-    /* sin pendientes para hoy: "+" para agregar. Con pendientes: cuántos quedan, o el tilde si ya están todos. */
-    var marca = !deHoy.length ? '+' : (pend ? String(pend) : '\u2713');
-    var fila = '<div class="task'+(hh?' ok':'')+'" data-fila="'+t.id+'">'+
+    return '<div class="task'+(hh?' ok':'')+'" data-fila="'+t.id+'">'+
       '<button type="button" class="tick" data-tick="'+t.id+'" role="checkbox" aria-checked="'+(hh?'true':'false')+'" aria-label="'+esc(t.texto)+'">✓</button>'+
       '<span class="txt">'+esc(t.texto)+'</span>'+
-      '<div class="chips">'+
       (hh ? '<button type="button" class="hecha" data-hora="'+t.id+'" aria-label="Cambiar la hora">'+esc(hh)+'</button>'
          : (t.minutos ? '<span class="min">'+minutosTxt(t.minutos)+'</span>' : ''))+
-      selectorDia(t.id, t.dia, 'Día fijo de '+esc(t.texto))+
-      '<button type="button" class="pend-add'+(deHoy.length?' hay':'')+'" data-abrir="'+t.id+'" aria-label="Pendientes adentro de '+esc(t.texto)+'">'+
-        marca+'</button></div>'+
       '<button type="button" class="del" data-quitar="'+t.id+'" aria-label="Borrar '+esc(t.texto)+'">✕</button></div>';
-    if(!subs.length && !abiertos[t.id]) return fila;
-    return '<div class="conjunto">'+fila+panelSubs(t, h)+'</div>';
   }
 
-  function panelSubs(t, h){
-    var subs = subsDe(t);
-    var deHoy = subs.filter(esDeHoy);
-    var otros = subs.filter(function(s){ return !esDeHoy(s); });
-    var reloj = (h && !h.nocturno) ? h.desde : null;
-    var total = 0, html = '<div class="pends">';
-
-    deHoy.concat(otros).forEach(function(s){
-      var hs = hechaEn(s.id);
-      var propio = esDeHoy(s);
-      var rango = '';
-      if(propio){
-        total += (s.minutos||0);
-        if(reloj !== null && (s.minutos||0) > 0){
-          if(!hs) rango = hhmm(reloj % 1440)+' – '+hhmm((reloj + s.minutos) % 1440);
-          reloj += s.minutos;
-        }
-      }
-      html += '<div class="pend'+(hs?' ok':'')+(propio?'':' otro-dia')+'" data-fila="'+s.id+'">'+
-        '<button type="button" class="tick" data-tick="'+s.id+'" role="checkbox" aria-checked="'+(hs?'true':'false')+'" aria-label="'+esc(s.texto)+'">✓</button>'+
-        '<span class="txt">'+esc(s.texto)+'</span>'+
-        '<div class="chips">'+
-        (hs ? '<button type="button" class="pend-chip hora" data-hora="'+s.id+'">'+esc(hs)+'</button>'
-            : (rango ? '<span class="pend-chip hora">'+rango+'</span>' : ''))+
-        '<button type="button" class="pend-chip" data-mins="'+s.id+'">'+(s.minutos ? minutosTxt(s.minutos) : 'cuánto')+'</button>'+
-        selectorDia(s.id, s.dia, 'Día de '+esc(s.texto))+'</div>'+
-        '<button type="button" class="del" data-quitarsub="'+s.id+'" aria-label="Borrar '+esc(s.texto)+'">✕</button></div>';
-    });
-
-    if(total) html += '<div class="pends-tot">Hoy acá adentro: '+minutosTxt(total)+'</div>';
-    html += '<div class="add-pend">'+
-      '<input type="text" maxlength="90" data-nuevo="'+t.id+'" placeholder="Otro pendiente de acá adentro…" aria-label="Nuevo pendiente">'+
-      '<button type="button" data-guardar="'+t.id+'" aria-label="Agregar pendiente">+</button></div>';
-    return html+'</div>';
-  }
-
-  function agregarSub(idTarea){
-    var input = elTareas.querySelector('[data-nuevo="'+idTarea+'"]');
-    if(!input) return;
-    var v = input.value.trim();
-    if(!v) return;
-    var t = tareaDe(idTarea);
-    if(!t) return;
-    if(!t.subs) t.subs = [];
-    t.subs.push({ id:uid(), texto:v, minutos:0, dia:null });
-    abiertos[idTarea] = true;
-    guardarTareas(); renderTareas();
-    var otro = elTareas.querySelector('[data-nuevo="'+idTarea+'"]');
-    if(otro) otro.focus();
-  }
-
-  function editarMinSub(id){
-    var par = subDe(id);
-    if(!par) return;
-    var v = prompt('¿Cuántos minutos te lleva? (por ejemplo 45)', par.sub.minutos || '');
-    if(v === null) return;
-    var m = Number(String(v).trim());
-    if(!(m >= 0 && m < 1000)){ alert('Poné un número de minutos.'); return; }
-    par.sub.minutos = Math.round(m);
-    guardarTareas(); renderTareas();
-  }
-
-  /* un desplegable con los siete días; sirve igual para una tarea y para un pendiente */
   var ORDEN_SEM = [1,2,3,4,5,6,0];
-  function selectorDia(id, dia, etiqueta){
-    var fijo = !(dia === null || dia === undefined);
-    var op = '<option value=""'+(fijo?'':' selected')+'>Todos</option>';
-    ORDEN_SEM.forEach(function(d){
-      var nom = DIAS[d].charAt(0).toUpperCase() + DIAS[d].slice(1,3);
-      op += '<option value="'+d+'"'+(fijo && dia === d ? ' selected' : '')+'>'+nom+'</option>';
-    });
-    return '<select class="dia-sel'+(fijo?' fijo':'')+'" data-diasel="'+id+'" aria-label="'+etiqueta+'">'+op+'</select>';
-  }
-
-  function fijarDia(id, valor){
-    var dia = (valor === '') ? null : Number(valor);
-    var t = tareaDe(id);
-    if(t){ t.dia = dia; }
-    else {
-      var par = subDe(id);
-      if(!par) return;
-      par.sub.dia = dia;
-    }
-    guardarTareas(); renderTareas();
-  }
-
-  function quitarSub(id){
-    var par = subDe(id);
-    if(!par) return;
-    par.padre.subs = par.padre.subs.filter(function(x){ return x.id !== id; });
-    Object.keys(dias).forEach(function(f){ if(dias[f].hechas) delete dias[f].hechas[id]; });
-    guardarTareas(); guardarDias(); renderTareas();
-  }
-
   function renderDia(){
     var d = deIso(diaVisto);
     var r = reg(diaVisto);
@@ -334,6 +216,9 @@ var SEMILLA = {"tareas": [{"id": "t01", "texto": "Poner a lavar la ropa", "minut
     document.getElementById('jNota').textContent = partes.join(' ');
 
     renderDiasSem();
+    document.getElementById('addDonde').textContent = todosLosDias
+      ? 'Lo que agregues va a aparecer todos los días.'
+      : ('Lo que agregues queda en ' + DIAS[d.getDay()] + '.');
 
     var elAl = document.getElementById('jAlerta');
     if(esTarde(r.acostada)){
@@ -436,6 +321,7 @@ var SEMILLA = {"tareas": [{"id": "t01", "texto": "Poner a lavar la ropa", "minut
 
     var hs = horarios();
     var usados = {}, html = '', jornadaActual = null;
+    var hayDosJornadas = !!(plan && plan.bloques && plan.bloques.some(function(b){ return (b.jornada||1) === 2; }));
 
     if(plan && plan.bloques){
       plan.bloques.forEach(function(b, i){
@@ -444,14 +330,15 @@ var SEMILLA = {"tareas": [{"id": "t01", "texto": "Poner a lavar la ropa", "minut
           if(!t || usados[id]) return '';
           usados[id] = 1;
           if(!esDeHoy(t)) return '';
-          return filaTarea(t, hs[i]);
+          return filaTarea(t);
         }).join('');
         if(!filas) return;
 
         var j = b.jornada || 1;
         if(j !== jornadaActual){
           jornadaActual = j;
-          html += '<div class="jornada-t">' + (j === 1 ? 'Primera jornada · agua y patio' : 'Segunda jornada · adentro y pantalla') + '</div>';
+          /* el título de jornada solo tiene sentido si el plan de verdad parte el día en dos */
+          if(hayDosJornadas) html += '<div class="jornada-t">' + (j === 1 ? 'Primera jornada' : 'Segunda jornada') + '</div>';
         }
 
         var h = hs[i];
@@ -467,9 +354,9 @@ var SEMILLA = {"tareas": [{"id": "t01", "texto": "Poner a lavar la ropa", "minut
     if(sueltas.length){
       html += '<div class="bloque">'+
         (plan && plan.bloques && plan.bloques.length ? '<div class="bloque-t"><span>Sin ordenar todavía</span></div>' : '')+
-        sueltas.map(function(t){ return filaTarea(t, null); }).join('')+'</div>';
+        sueltas.map(filaTarea).join('')+'</div>';
     }
-    if(!html) html = '<div class="empty">Hoy no tenés nada con día fijo. Tocá "cualquier día" en una tarea para asignarle un día, o mirá otra fecha.</div>';
+    if(!html) html = '<div class="empty">Este día no tiene nada cargado. Escribí abajo lo que quieras hacer y queda en '+DIAS[diaSemana()]+'.</div>';
     elTareas.innerHTML = html;
 
     /* En iPhone el toque no siempre llega al contenedor: escuchamos fila por fila. */
@@ -479,11 +366,7 @@ var SEMILLA = {"tareas": [{"id": "t01", "texto": "Poner a lavar la ropa", "minut
         var id = fila.getAttribute('data-fila');
         fila.addEventListener('click', function(ev){
           if(ev.target.closest('[data-quitar]')) return;
-          if(ev.target.closest('[data-quitarsub]')){ quitarSub(id); return; }
           if(ev.target.closest('[data-hora]')){ editarHora(id); return; }
-          if(ev.target.closest('[data-mins]')){ editarMinSub(id); return; }
-          if(ev.target.closest('[data-diasel]')) return;
-          if(ev.target.closest('[data-abrir]')){ abiertos[id] = !abiertos[id]; renderTareas(); return; }
           alternar(id);
         });
       })(filas[i]);
@@ -505,11 +388,7 @@ var SEMILLA = {"tareas": [{"id": "t01", "texto": "Poner a lavar la ropa", "minut
   var FRASES_QUE = ['¡Una menos! ✓','Ahí va, sumando.','Bien ahí.','Eso quedó listo.','Un paso más del día.'];
   var FRASES_TRABAJO = ['¡Eso! Un pendiente del trabajo, hecho. 💜','Avanzaste la compu — seguí así.','Un ítem menos en tu bloque de trabajo.','Bien ahí, profesional.','Eso suma para tu semana.'];
 
-  function esDelTrabajo(id){
-    var par = subDe(id);
-    if(par && par.padre) return esDeBloqueTrabajo(par.padre.id);
-    return esDeBloqueTrabajo(id);
-  }
+  function esDelTrabajo(id){ return esDeBloqueTrabajo(id); }
   function esDeBloqueTrabajo(idTarea){
     if(!plan || !plan.bloques) return false;
     for(var i=0;i<plan.bloques.length;i++){
@@ -566,24 +445,30 @@ var SEMILLA = {"tareas": [{"id": "t01", "texto": "Poner a lavar la ropa", "minut
 
   function guardarTareas(){ save(KT,tareas); save(KP,plan); empujarDB(); }
 
+  var todosLosDias = false;
+
   function agregarTarea(){
     var i=document.getElementById('tareaNueva');
     var v=i.value.trim();
     if(!v) return;
-    tareas.push({ id:uid(), texto:v, hecho:false, minutos:0, creado:Date.now() });
+    /* ya no hay selector por fila: la tarea cae en el día que estás mirando */
+    tareas.push({ id:uid(), texto:v, hecho:false, minutos:0, dia:(todosLosDias ? null : diaSemana()), creado:Date.now() });
     i.value='';
     guardarTareas();
     renderTareas();
     i.focus();
   }
   document.getElementById('addTarea').addEventListener('click', agregarTarea);
+  document.getElementById('addTodos').addEventListener('click', function(){
+    todosLosDias = !todosLosDias;
+    this.setAttribute('aria-pressed', todosLosDias ? 'true' : 'false');
+    renderDia();
+  });
   document.getElementById('tareaNueva').addEventListener('keydown', function(e){
     if(e.key==='Enter'){ e.preventDefault(); agregarTarea(); }
   });
 
   elTareas.addEventListener('click', function(e){
-    var g=e.target.closest('[data-guardar]');
-    if(g){ agregarSub(g.getAttribute('data-guardar')); return; }
     var q=e.target.closest('[data-quitar]');
     if(!q) return;
     var id=q.getAttribute('data-quitar');
@@ -591,16 +476,6 @@ var SEMILLA = {"tareas": [{"id": "t01", "texto": "Poner a lavar la ropa", "minut
     Object.keys(dias).forEach(function(f){ if(dias[f].hechas) delete dias[f].hechas[id]; });
     guardarTareas(); guardarDias();
     renderTareas();
-  });
-
-  elTareas.addEventListener('change', function(e){
-    var sel = e.target.closest('[data-diasel]');
-    if(sel) fijarDia(sel.getAttribute('data-diasel'), sel.value);
-  });
-
-  elTareas.addEventListener('keydown', function(e){
-    var i=e.target.closest('[data-nuevo]');
-    if(i && e.key==='Enter'){ e.preventDefault(); agregarSub(i.getAttribute('data-nuevo')); }
   });
 
   /* ── la jornada: inputs ── */
@@ -1075,17 +950,17 @@ var SEMILLA = {"tareas": [{"id": "t01", "texto": "Poner a lavar la ropa", "minut
     '5. Lo que tiene horario o vencimiento va temprano.\\n'+
     '6. Regar plantas y mover macetas, al atardecer.\\n'+
     '7. El bloque de trabajo en compu va entero, sin picar.\\n\\n'+
-    'Algunas tareas tienen pendientes adentro (te los paso como "adentro:"). A esos repartilos vos:\\n'+
-    'a. Cada uno lleva "dia" (0 domingo a 6 sábado) y "minutos". Si puede ser cualquier día, dia = null.\\n'+
-    'b. No cargues más de 300 minutos de pendientes en un mismo día: el trabajo en compu es de 4 a 6 horas.\\n'+
-    'c. Lo que tiene fecha o depende de otro va primero; lo que pide cabeza fresca, al principio del bloque.\\n'+
-    'd. Juntá en el mismo día lo que es del mismo tema, para no saltar de asunto.\\n'+
-    'e. El orden en que los devolvés es el orden en que los va a hacer.\\n\\n'+
+    'Cada tarea vive en un día de la semana: te paso el que tiene entre corchetes. Podés reasignarlo:\\n'+
+    'a. En "dias" devolvé solo las que convenga mover, con "dia" (0 domingo a 6 sábado) o null si va todos los días.\\n'+
+    'b. No cargues más de 300 minutos de tareas movidas en un mismo día.\\n'+
+    'c. Juntá en el mismo día lo del mismo tema o del mismo ambiente, para no saltar de asunto.\\n'+
+    'd. Lo que necesita un local abierto no va el domingo.\\n'+
+    'e. Si una tarea ya está bien donde está, no la incluyas en "dias".\\n\\n'+
     'Cada bloque lleva "jornada" (1 o 2 si no entra todo en un día) y "ancla" ("HH:MM" si tiene que ir a una hora fija, "noche" si va antes de dormir, o null si fluye). Marcá "trabajo": true en el bloque de la compu.\\n'+
     'Título: orden corta en español rioplatense, máximo 5 palabras. Motivo: una frase.\\n'+
     'Usá TODOS los ids, cada uno una vez, sin inventar tareas.\\n\\n'+
     'Respondé SOLO este JSON:\\n'+
-    '{"nota":"consejo de una o dos frases","bloques":[{"titulo":"Poné a andar lo que tarda","motivo":"Mientras corre solo, hacés el resto.","jornada":1,"ancla":null,"trabajo":false,"tareas":[{"id":"abc","minutos":10}]}],"pendientes":[{"id":"xyz","dia":1,"minutos":60}]}\\n\\n';
+    '{"nota":"consejo de una o dos frases","bloques":[{"titulo":"Poné a andar lo que tarda","motivo":"Mientras corre solo, hacés el resto.","jornada":1,"ancla":null,"trabajo":false,"tareas":[{"id":"abc","minutos":10}]}],"dias":[{"id":"xyz","dia":1}]}\\n\\n';
 
   var sampleFn=null;
   (window.claude && window.claude.use ? window.claude.use('sample') : Promise.resolve(null)).then(function(fn){
@@ -1116,11 +991,8 @@ var SEMILLA = {"tareas": [{"id": "t01", "texto": "Poner a lavar la ropa", "minut
     else if(r.levantada) ctx+='Se levantó '+r.levantada+(r.acostada?' y se había acostado '+r.acostada:'')+'.\\n';
     if(r.trabajo.desde) ctx+='Trabaja de '+r.trabajo.desde+' a '+(r.trabajo.hasta||'?')+'.\\n';
     var listado=pend.map(function(t){
-      var l = '- id '+t.id+': '+t.texto;
-      subsDe(t).forEach(function(x){
-        l += '\\n    adentro: id '+x.id+': '+x.texto+(x.minutos?' ('+x.minutos+' min)':'');
-      });
-      return l;
+      var dd = (t.dia === null || t.dia === undefined) ? 'todos los d\u00edas' : DIAS[t.dia];
+      return '- id '+t.id+': '+t.texto+(t.minutos?' ('+t.minutos+' min)':'')+' [d\u00eda: '+dd+']';
     }).join('\\n');
 
     try{
@@ -1143,24 +1015,12 @@ var SEMILLA = {"tareas": [{"id": "t01", "texto": "Poner a lavar la ropa", "minut
       });
       if(!nuevos.length) throw { code:'invalid_json' };
 
-      /* el reparto de los pendientes de adentro: día, minutos y orden */
-      var orden = {};
-      ((res&&res.pendientes)||[]).forEach(function(x, k){
-        var par = subDe(String(x&&x.id));
-        if(!par) return;
-        var d = Number(x.dia);
-        par.sub.dia = (x.dia === null || x.dia === undefined || isNaN(d) || d < 0 || d > 6) ? null : d;
-        var m = Number(x.minutos);
-        if(m > 0 && m < 1000) par.sub.minutos = Math.round(m);
-        orden[par.sub.id] = k;
-      });
-      tareas.forEach(function(t){
-        if(!subsDe(t).length) return;
-        t.subs.sort(function(a,b){
-          var oa = (orden[a.id] === undefined) ? 999 : orden[a.id];
-          var ob = (orden[b.id] === undefined) ? 999 : orden[b.id];
-          return oa - ob;
-        });
+      /* el día de la semana que le toca a cada tarea */
+      ((res&&res.dias)||[]).forEach(function(x){
+        var t = tareaDe(String(x&&x.id));
+        if(!t) return;
+        var dd = Number(x.dia);
+        t.dia = (x.dia === null || x.dia === undefined || isNaN(dd) || dd < 0 || dd > 6) ? null : dd;
       });
 
       plan={ nota:res.nota?String(res.nota):'', bloques:nuevos, cuando:Date.now() };
