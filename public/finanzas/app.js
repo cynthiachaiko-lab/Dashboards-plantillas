@@ -144,8 +144,10 @@ var SEMILLA = {"tareas": [{"id": "t01", "texto": "Poner a lavar la ropa", "minut
         if(trabD !== null){ out[i] = { desde:trabD, hasta:trabD+dur }; t = Math.max(t, trabD+dur+15); return; }
       }
       if(b.ancla && b.ancla !== 'noche'){
+        /* un ancla es un compromiso de horario, no un piso: manda siempre que esté puesta,
+           aunque lo anterior se haya corrido (por eso "anclas clínicas críticas" no se mueven). */
         var a = aMin(b.ancla);
-        if(a !== null && a > t) t = a;
+        if(a !== null) t = a;
       }
       out[i] = { desde:t, hasta:t+dur };
       t = t + dur + 15;
