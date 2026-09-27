@@ -107,7 +107,7 @@ var SEMILLA = {"tareas": [{"id": "t01", "texto": "Poner a lavar la ropa", "minut
   function duracionBloque(b){
     return (b.ids||[]).reduce(function(a,id){
       var t = tareaDe(id);
-      if(!t) return a;
+      if(!t || !esDeHoy(t)) return a;
       /* si la tarea tiene pendientes adentro, manda lo que de verdad hay para hoy */
       return a + Math.max(t.minutos||0, minutosSubsHoy(t));
     },0);
@@ -192,6 +192,8 @@ var SEMILLA = {"tareas": [{"id": "t01", "texto": "Poner a lavar la ropa", "minut
       '<span class="txt">'+esc(t.texto)+'</span>'+
       (hh ? '<button type="button" class="hecha" data-hora="'+t.id+'" aria-label="Cambiar la hora">'+esc(hh)+'</button>'
          : (t.minutos ? '<span class="min">'+minutosTxt(t.minutos)+'</span>' : ''))+
+      '<button type="button" class="dia-chip'+((t.dia===null||t.dia===undefined)?'':' fijo')+'" data-diatarea="'+t.id+'" aria-label="Día fijo de '+esc(t.texto)+'">'+
+        ((t.dia===null||t.dia===undefined) ? 'día' : DIAS[t.dia].slice(0,3))+'</button>'+
       '<button type="button" class="pend-add'+(subs.length?' hay':'')+'" data-abrir="'+t.id+'" aria-label="Pendientes adentro de '+esc(t.texto)+'">'+
         (subs.length ? String(pend || subs.length) : '+')+'</button>'+
       '<button type="button" class="del" data-quitar="'+t.id+'" aria-label="Borrar '+esc(t.texto)+'">✕</button></div>';
@@ -271,6 +273,15 @@ var SEMILLA = {"tareas": [{"id": "t01", "texto": "Poner a lavar la ropa", "minut
     guardarTareas(); renderTareas();
   }
 
+  function rotarDiaTarea(id){
+    var t = tareaDe(id);
+    if(!t) return;
+    var d = t.dia;
+    t.dia = (d === null || d === undefined) ? 1 : (d === 0 ? null : d + 1);
+    if(t.dia === 7) t.dia = 0;
+    guardarTareas(); renderTareas();
+  }
+
   function quitarSub(id){
     var par = subDe(id);
     if(!par) return;
@@ -345,11 +356,12 @@ var SEMILLA = {"tareas": [{"id": "t01", "texto": "Poner a lavar la ropa", "minut
   function renderTareas(){
     renderDia();
     var r = reg(diaVisto);
-    var hechas = tareas.filter(function(t){ return !!r.hechas[t.id]; }).length;
+    var visibles = tareas.filter(esDeHoy);
+    var hechas = visibles.filter(function(t){ return !!r.hechas[t.id]; }).length;
     elMeta.hidden = tareas.length === 0;
     if(tareas.length){
-      document.getElementById('tareasCuenta').textContent = hechas+' de '+tareas.length+' listas';
-      document.getElementById('tareasBarra').style.width = Math.round(hechas/tareas.length*100)+'%';
+      document.getElementById('tareasCuenta').textContent = visibles.length ? (hechas+' de '+visibles.length+' listas') : 'Nada con día fijo para hoy';
+      document.getElementById('tareasBarra').style.width = visibles.length ? (Math.round(hechas/visibles.length*100)+'%') : '0%';
     }
 
     elNota.hidden = !(plan && plan.nota);
@@ -369,6 +381,7 @@ var SEMILLA = {"tareas": [{"id": "t01", "texto": "Poner a lavar la ropa", "minut
           var t = tareaDe(id);
           if(!t || usados[id]) return '';
           usados[id] = 1;
+          if(!esDeHoy(t)) return '';
           return filaTarea(t, hs[i]);
         }).join('');
         if(!filas) return;
@@ -388,12 +401,13 @@ var SEMILLA = {"tareas": [{"id": "t01", "texto": "Poner a lavar la ropa", "minut
       });
     }
 
-    var sueltas = tareas.filter(function(t){ return !usados[t.id]; });
+    var sueltas = tareas.filter(function(t){ return !usados[t.id] && esDeHoy(t); });
     if(sueltas.length){
       html += '<div class="bloque">'+
         (plan && plan.bloques && plan.bloques.length ? '<div class="bloque-t"><span>Sin ordenar todavía</span></div>' : '')+
         sueltas.map(function(t){ return filaTarea(t, null); }).join('')+'</div>';
     }
+    if(!html) html = '<div class="empty">Hoy no tenés nada con día fijo. Tocá "cualquier día" en una tarea para asignarle un día, o mirá otra fecha.</div>';
     elTareas.innerHTML = html;
 
     /* En iPhone el toque no siempre llega al contenedor: escuchamos fila por fila. */
@@ -407,6 +421,7 @@ var SEMILLA = {"tareas": [{"id": "t01", "texto": "Poner a lavar la ropa", "minut
           if(ev.target.closest('[data-hora]')){ editarHora(id); return; }
           if(ev.target.closest('[data-mins]')){ editarMinSub(id); return; }
           if(ev.target.closest('[data-dia]')){ rotarDiaSub(id); return; }
+          if(ev.target.closest('[data-diatarea]')){ rotarDiaTarea(id); return; }
           if(ev.target.closest('[data-abrir]')){ abiertos[id] = !abiertos[id]; renderTareas(); return; }
           alternar(id);
         });
