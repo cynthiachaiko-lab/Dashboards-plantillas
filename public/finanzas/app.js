@@ -188,16 +188,19 @@ var SEMILLA = {"tareas": [{"id": "t01", "texto": "Poner a lavar la ropa", "minut
   function filaTarea(t, h){
     var hh = hechaEn(t.id);
     var subs = subsDe(t);
-    var pend = subs.filter(function(s){ return esDeHoy(s) && !hechaEn(s.id); }).length;
+    var deHoy = subs.filter(esDeHoy);
+    var pend = deHoy.filter(function(s){ return !hechaEn(s.id); }).length;
+    /* sin pendientes para hoy: "+" para agregar. Con pendientes: cuántos quedan, o el tilde si ya están todos. */
+    var marca = !deHoy.length ? '+' : (pend ? String(pend) : '\u2713');
     var fila = '<div class="task'+(hh?' ok':'')+'" data-fila="'+t.id+'">'+
       '<button type="button" class="tick" data-tick="'+t.id+'" role="checkbox" aria-checked="'+(hh?'true':'false')+'" aria-label="'+esc(t.texto)+'">✓</button>'+
       '<span class="txt">'+esc(t.texto)+'</span>'+
+      '<div class="chips">'+
       (hh ? '<button type="button" class="hecha" data-hora="'+t.id+'" aria-label="Cambiar la hora">'+esc(hh)+'</button>'
          : (t.minutos ? '<span class="min">'+minutosTxt(t.minutos)+'</span>' : ''))+
-      '<button type="button" class="dia-chip'+((t.dia===null||t.dia===undefined)?'':' fijo')+'" data-diatarea="'+t.id+'" aria-label="Día fijo de '+esc(t.texto)+'">'+
-        ((t.dia===null||t.dia===undefined) ? 'día' : DIAS[t.dia].slice(0,3))+'</button>'+
-      '<button type="button" class="pend-add'+(subs.length?' hay':'')+'" data-abrir="'+t.id+'" aria-label="Pendientes adentro de '+esc(t.texto)+'">'+
-        (subs.length ? String(pend || subs.length) : '+')+'</button>'+
+      selectorDia(t.id, t.dia, 'Día fijo de '+esc(t.texto))+
+      '<button type="button" class="pend-add'+(deHoy.length?' hay':'')+'" data-abrir="'+t.id+'" aria-label="Pendientes adentro de '+esc(t.texto)+'">'+
+        marca+'</button></div>'+
       '<button type="button" class="del" data-quitar="'+t.id+'" aria-label="Borrar '+esc(t.texto)+'">✕</button></div>';
     if(!subs.length && !abiertos[t.id]) return fila;
     return '<div class="conjunto">'+fila+panelSubs(t, h)+'</div>';
@@ -228,8 +231,7 @@ var SEMILLA = {"tareas": [{"id": "t01", "texto": "Poner a lavar la ropa", "minut
         (hs ? '<button type="button" class="pend-chip hora" data-hora="'+s.id+'">'+esc(hs)+'</button>'
             : (rango ? '<span class="pend-chip hora">'+rango+'</span>' : ''))+
         '<button type="button" class="pend-chip" data-mins="'+s.id+'">'+(s.minutos ? minutosTxt(s.minutos) : 'cuánto')+'</button>'+
-        '<button type="button" class="pend-chip dia" data-dia="'+s.id+'">'+
-          ((s.dia === null || s.dia === undefined) ? 'cualquier día' : DIAS[s.dia].slice(0,3))+'</button></div>'+
+        selectorDia(s.id, s.dia, 'Día de '+esc(s.texto))+'</div>'+
         '<button type="button" class="del" data-quitarsub="'+s.id+'" aria-label="Borrar '+esc(s.texto)+'">✕</button></div>';
     });
 
@@ -266,21 +268,27 @@ var SEMILLA = {"tareas": [{"id": "t01", "texto": "Poner a lavar la ropa", "minut
     guardarTareas(); renderTareas();
   }
 
-  function rotarDiaSub(id){
-    var par = subDe(id);
-    if(!par) return;
-    var d = par.sub.dia;
-    par.sub.dia = (d === null || d === undefined) ? 1 : (d === 0 ? null : d + 1);
-    if(par.sub.dia === 7) par.sub.dia = 0;
-    guardarTareas(); renderTareas();
+  /* un desplegable con los siete días; sirve igual para una tarea y para un pendiente */
+  var ORDEN_SEM = [1,2,3,4,5,6,0];
+  function selectorDia(id, dia, etiqueta){
+    var fijo = !(dia === null || dia === undefined);
+    var op = '<option value=""'+(fijo?'':' selected')+'>Todos</option>';
+    ORDEN_SEM.forEach(function(d){
+      var nom = DIAS[d].charAt(0).toUpperCase() + DIAS[d].slice(1,3);
+      op += '<option value="'+d+'"'+(fijo && dia === d ? ' selected' : '')+'>'+nom+'</option>';
+    });
+    return '<select class="dia-sel'+(fijo?' fijo':'')+'" data-diasel="'+id+'" aria-label="'+etiqueta+'">'+op+'</select>';
   }
 
-  function rotarDiaTarea(id){
+  function fijarDia(id, valor){
+    var dia = (valor === '') ? null : Number(valor);
     var t = tareaDe(id);
-    if(!t) return;
-    var d = t.dia;
-    t.dia = (d === null || d === undefined) ? 1 : (d === 0 ? null : d + 1);
-    if(t.dia === 7) t.dia = 0;
+    if(t){ t.dia = dia; }
+    else {
+      var par = subDe(id);
+      if(!par) return;
+      par.sub.dia = dia;
+    }
     guardarTareas(); renderTareas();
   }
 
@@ -297,7 +305,7 @@ var SEMILLA = {"tareas": [{"id": "t01", "texto": "Poner a lavar la ropa", "minut
     var r = reg(diaVisto);
     var esHoy = (diaVisto === iso(new Date()));
     document.getElementById('diaSub').textContent =
-      (esHoy?'Hoy · ':'') + DIAS[d.getDay()] + ' ' + d.getDate() + ' de ' + MESES[d.getMonth()];
+      (esHoy?'Hoy · ':'') + d.getDate() + ' de ' + MESES[d.getMonth()];
     document.getElementById('stripHoy').textContent = DIAS[d.getDay()];
     document.getElementById('stripYear').textContent = d.getFullYear();
     document.getElementById('diaNext').disabled = (diaVisto >= iso(new Date()));
@@ -325,6 +333,8 @@ var SEMILLA = {"tareas": [{"id": "t01", "texto": "Poner a lavar la ropa", "minut
     }
     document.getElementById('jNota').textContent = partes.join(' ');
 
+    renderDiasSem();
+
     var elAl = document.getElementById('jAlerta');
     if(esTarde(r.acostada)){
       var racha = rachaTrasnoche(diaVisto);
@@ -334,6 +344,56 @@ var SEMILLA = {"tareas": [{"id": "t01", "texto": "Poner a lavar la ropa", "minut
       elAl.hidden = false;
     }else{
       elAl.hidden = true;
+    }
+  }
+
+  /* ── las pestañas de la semana: un color por día, la de hoy con su puntito ── */
+  var COLOR_DIA = {
+    1:['#09CDCD','#6FE7DF'], 2:['#3FD9C8','#A0E5D9'], 3:['#64DDB4','#99F2D1'],
+    4:['#919BFF','#BFC4FF'], 5:['#B57BEE','#D3A8FF'], 6:['#CB8CF5','#E6C4FF'],
+    0:['#F080BE','#FFA9D4']
+  };
+  var elDiasSem = document.getElementById('diasSem');
+
+  function lunesDe(fecha){
+    var d = deIso(fecha);
+    var corr = (d.getDay() === 0) ? -6 : (1 - d.getDay());  /* la semana arranca el lunes */
+    d.setDate(d.getDate() + corr);
+    return d;
+  }
+
+  function renderDiasSem(){
+    var lun = lunesDe(diaVisto);
+    var hoyIso = iso(new Date());
+    var visto = diaSemana();
+    var html = '';
+    ORDEN_SEM.forEach(function(d, i){
+      var f = new Date(lun.getTime());
+      f.setDate(lun.getDate() + i);
+      var fIso = iso(f);
+      var c = COLOR_DIA[d];
+      html += '<button type="button" class="dia-tab'+(d===visto?' activo':'')+(fIso===hoyIso?' hoy':'')+'"'+
+        ' style="--c:'+c[0]+';--c2:'+c[1]+'" data-fecha="'+fIso+'"'+
+        ' aria-label="'+DIAS[d]+' '+f.getDate()+' de '+MESES[f.getMonth()]+'"'+
+        (d===visto?' aria-current="date"':'')+'>'+
+        DIAS[d].slice(0,3)+'<span class="pt"></span></button>';
+    });
+    elDiasSem.innerHTML = html;
+
+    var d0 = deIso(diaVisto), fin = new Date(lun.getTime());
+    fin.setDate(lun.getDate() + 6);
+    document.getElementById('diasNota').textContent =
+      'Semana del ' + lun.getDate() + ' al ' + fin.getDate() + ' de ' + MESES[fin.getMonth()] +
+      (diaVisto > hoyIso ? ' · estás viendo un día que todavía no llegó' : '');
+
+    var tabs = elDiasSem.querySelectorAll('[data-fecha]');
+    for(var i=0;i<tabs.length;i++){
+      (function(tab){
+        tab.addEventListener('click', function(){
+          diaVisto = tab.getAttribute('data-fecha');
+          renderTareas();
+        });
+      })(tabs[i]);
     }
   }
 
@@ -422,8 +482,7 @@ var SEMILLA = {"tareas": [{"id": "t01", "texto": "Poner a lavar la ropa", "minut
           if(ev.target.closest('[data-quitarsub]')){ quitarSub(id); return; }
           if(ev.target.closest('[data-hora]')){ editarHora(id); return; }
           if(ev.target.closest('[data-mins]')){ editarMinSub(id); return; }
-          if(ev.target.closest('[data-dia]')){ rotarDiaSub(id); return; }
-          if(ev.target.closest('[data-diatarea]')){ rotarDiaTarea(id); return; }
+          if(ev.target.closest('[data-diasel]')) return;
           if(ev.target.closest('[data-abrir]')){ abiertos[id] = !abiertos[id]; renderTareas(); return; }
           alternar(id);
         });
@@ -532,6 +591,11 @@ var SEMILLA = {"tareas": [{"id": "t01", "texto": "Poner a lavar la ropa", "minut
     Object.keys(dias).forEach(function(f){ if(dias[f].hechas) delete dias[f].hechas[id]; });
     guardarTareas(); guardarDias();
     renderTareas();
+  });
+
+  elTareas.addEventListener('change', function(e){
+    var sel = e.target.closest('[data-diasel]');
+    if(sel) fijarDia(sel.getAttribute('data-diasel'), sel.value);
   });
 
   elTareas.addEventListener('keydown', function(e){

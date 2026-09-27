@@ -223,10 +223,15 @@
   }
 
   .task{
-    display:flex; align-items:center; gap:12px; padding:12px 0;
-    border-bottom:1px solid rgba(255,255,255,.09); font-size:.94rem; font-weight:600;
-    cursor:pointer; user-select:none;
+    display:grid; grid-template-columns:28px minmax(0,1fr) 28px;
+    column-gap:12px; row-gap:8px; align-items:center;
+    padding:12px 0; border-bottom:1px solid rgba(255,255,255,.09);
+    font-size:.94rem; font-weight:600; cursor:pointer; user-select:none;
   }
+  .task > .tick{ grid-column:1; grid-row:1; }
+  .task > .txt{ grid-column:2; grid-row:1; }
+  .task > .del{ grid-column:3; grid-row:1; }
+  .task > .chips{ grid-column:2; grid-row:2; display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
   .task:last-child{ border-bottom:none; }
   .tick{
     width:28px; height:28px; border-radius:10px; flex-shrink:0; cursor:pointer; padding:0;
@@ -239,7 +244,7 @@
     background:linear-gradient(150deg,var(--series-ing-alto),var(--series-ing));
     border-color:transparent; color:#0B2B33;
   }
-  .task .txt{ flex:1; min-width:0; overflow-wrap:anywhere; }
+  .task .txt{ min-width:0; overflow-wrap:anywhere; }
   .task.ok .txt{ color:var(--ink-3); text-decoration:line-through; }
   .task .min{ font-size:.75rem; font-weight:600; color:var(--ink-3); flex-shrink:0; }
   .task .hecha{
@@ -255,14 +260,41 @@
   }
   .del:hover{ opacity:1; border-color:rgba(205,163,255,.6); }
 
-  /* ── día fijo de una tarea ── */
-  .dia-chip{
-    font-size:.64rem; font-weight:800; letter-spacing:.04em; flex-shrink:0; cursor:pointer;
-    font-family:var(--sans); padding:4px 9px; border-radius:20px; line-height:1;
-    background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.16); color:var(--ink-3);
+  /* ── pestañas de los días de la semana ── */
+  .dias-sem{ display:flex; gap:5px; margin:18px 0 4px; }
+  .dia-tab{
+    flex:1; min-width:0; border-radius:13px; padding:9px 1px 8px; cursor:pointer;
+    font-family:var(--sans); font-size:.58rem; font-weight:800; letter-spacing:.02em; text-transform:uppercase;
+    color:var(--ink-3); border:1px solid rgba(255,255,255,.10); background:rgba(255,255,255,.035);
+    transition:.18s; position:relative;
     touch-action:manipulation; -webkit-tap-highlight-color:transparent;
   }
-  .dia-chip.fijo{ border-color:rgba(145,155,255,.45); color:#BFC4FF; background:rgba(145,155,255,.12); }
+  .dia-tab .pt{
+    display:block; width:4px; height:4px; border-radius:50%; margin:4px auto 0;
+    background:transparent;
+  }
+  .dia-tab.hoy .pt{ background:currentColor; }
+  .dia-tab.activo{
+    color:#0B1020; border-color:transparent;
+    background:linear-gradient(160deg, var(--c2), var(--c));
+    box-shadow:0 0 22px -9px var(--c);
+  }
+  .dias-nota{
+    font-size:.68rem; font-weight:600; color:var(--ink-3); text-align:center; margin-bottom:16px;
+  }
+
+  /* ── día fijo de una tarea: desplegable ── */
+  .dia-sel{
+    font-size:.62rem; font-weight:800; letter-spacing:.02em; flex-shrink:0; cursor:pointer;
+    font-family:var(--sans); padding:5px 16px 5px 8px; border-radius:20px; line-height:1.2;
+    background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.16); color:var(--ink-3);
+    appearance:none; -webkit-appearance:none; text-align:center;
+    background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath fill='%23888' d='M0 0h10L5 6z'/%3E%3C/svg%3E");
+    background-repeat:no-repeat; background-position:right 5px center; background-size:7px;
+    touch-action:manipulation; -webkit-tap-highlight-color:transparent;
+  }
+  .dia-sel.fijo{ border-color:rgba(145,155,255,.45); color:#BFC4FF; background-color:rgba(145,155,255,.12); }
+  .dia-sel option{ background:#161029; color:#F2EDFF; }
 
   /* ── pendientes adentro de una tarea ── */
   .pend-add{
