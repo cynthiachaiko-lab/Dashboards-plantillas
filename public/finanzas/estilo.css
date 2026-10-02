@@ -1,5 +1,4 @@
-
-  :root{
+:root{
     --ink-1:#EDEAFB;
     --ink-2:rgba(205,196,250,.72);
     --ink-3:rgba(205,196,250,.5);
@@ -242,6 +241,14 @@
   .task .txt{ flex:1; min-width:0; overflow-wrap:anywhere; }
   .task.ok .txt{ color:var(--ink-3); text-decoration:line-through; }
   .task .min{ font-size:.75rem; font-weight:600; color:var(--ink-3); flex-shrink:0; }
+  .task.prio .txt{ color:#FFD4EA; }
+  .task.prio.ok .txt{ color:var(--ink-3); }
+  .estrella{
+    flex-shrink:0; padding:0 2px; background:none; border:none; cursor:pointer; line-height:1;
+    font-size:.82rem; color:#FFA9D4; touch-action:manipulation; -webkit-tap-highlight-color:transparent;
+  }
+  .bloque.primero{ border:1px solid rgba(255,169,212,.3); }
+  .bloque.primero .bloque-t > span:first-child{ color:#FFD4EA; }
   .task .hecha{
     font-size:.74rem; font-weight:800; color:#0B2B33; flex-shrink:0; cursor:pointer;
     background:linear-gradient(150deg,var(--series-ing-alto),var(--series-ing));
@@ -303,6 +310,9 @@
   .todos-dias[aria-pressed="true"]{
     border-color:transparent; color:#0B2B33;
     background:linear-gradient(150deg,var(--series-ing-alto),var(--series-ing));
+  }
+  .todos-dias.es-prio[aria-pressed="true"]{
+    color:#3A0A24; background:linear-gradient(150deg,#FFC9E4,#FFA9D4);
   }
 
   .tareas-meta{ display:flex; align-items:center; gap:12px; font-size:.8rem; font-weight:600; color:var(--ink-3); margin-bottom:14px; }
