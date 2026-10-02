@@ -356,8 +356,9 @@ var SEMILLA = {"tareas": [{"id": "t01", "texto": "Poner a lavar la ropa", "minut
     var prios = ordenDelPlan(tareas.filter(function(t){ return t.prioridad && esDeHoy(t); }));
     if(prios.length){
       prios.forEach(function(t){ usados[t.id] = 1; });
+      var minPrio = prios.reduce(function(a,t){ return a+(t.minutos||0); },0);
       html += '<div class="bloque primero"><div class="bloque-t"><span>Primero</span>'+
-        '<span class="mins">'+minutosTxt(prios.reduce(function(a,t){ return a+(t.minutos||0); },0))+'</span></div>'+
+        (minPrio ? '<span class="mins">'+minutosTxt(minPrio)+'</span>' : '')+'</div>'+
         '<div class="bloque-m">Lo que marcaste como prioridad, en el orden en que te queda de paso.</div>'+
         prios.map(filaTarea).join('')+'</div>';
     }
