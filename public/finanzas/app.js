@@ -1,4 +1,4 @@
-var SEMILLA = {"tareas": [{"id": "t01", "texto": "Poner a lavar la ropa", "minutos": 10, "creado": 1, "dia": null}, {"id": "t04", "texto": "Podar las palmeras", "minutos": 60, "creado": 2, "dia": 6}, {"id": "t05", "texto": "Palear abono", "minutos": 45, "creado": 3, "dia": 0}, {"id": "t07", "texto": "Correr las suculentas de su pisito", "minutos": 10, "creado": 4, "dia": 0}, {"id": "t08", "texto": "Lavar el garaje (el grande)", "minutos": 90, "creado": 5, "dia": 0}, {"id": "t10", "texto": "Lavar el pisito de las suculentas", "minutos": 15, "creado": 6, "dia": 0}, {"id": "t12", "texto": "Reubicar las suculentas según el sol de la temporada", "minutos": 25, "creado": 7, "dia": 0}, {"id": "t15", "texto": "Regar todas las plantas", "minutos": 20, "creado": 8, "dia": 0}, {"id": "t16", "texto": "Baba: poner a lavar sus sábanas", "minutos": 10, "creado": 9, "dia": 6}, {"id": "t17", "texto": "Baba: pasar el trapo a la galería", "minutos": 30, "creado": 10, "dia": 6}, {"id": "t18", "texto": "Baba: ordenar la cama", "minutos": 10, "creado": 11, "dia": 6}, {"id": "t19", "texto": "Baba: sacar verduras", "minutos": 20, "creado": 12, "dia": 6}, {"id": "t20", "texto": "Ir a la verdulería", "minutos": 30, "creado": 13, "dia": 6}, {"id": "t21", "texto": "Limpiar el polvo del modular de la sala", "minutos": 30, "creado": 14, "dia": 1}, {"id": "t22", "texto": "Lavar los platos y ordenar la cocina", "minutos": 30, "creado": 15, "dia": null}, {"id": "t24", "texto": "Barrer la cocina", "minutos": 10, "creado": 16, "dia": null}, {"id": "t26", "texto": "Ayudar a Mau con su cel", "minutos": 20, "creado": 17, "dia": null}, {"id": "mudga0csnnibj", "texto": "Ordenar y limpiar lavadero", "minutos": 25, "creado": 18, "dia": 2}, {"id": "mudgam72mpnq3", "texto": "Podar arbustos", "minutos": 40, "creado": 19, "dia": 6}, {"id": "muflycr1aynj4", "texto": "Podar el pasto", "minutos": 45, "creado": 20, "dia": 6}, {"id": "mugc0kekt9253", "texto": "Contadora", "minutos": 30, "creado": 21, "dia": null}, {"id": "mugerl7thl6ct", "texto": "Cargar en el auto ropa para la modista", "minutos": 10, "creado": 22, "dia": null}, {"id": "pdpqwz8z", "texto": "Aseo personal, desayuno completo e hidratación", "minutos": 45, "dia": null, "creado": 23}, {"id": "wk00k2xf3", "texto": "Ver tutorial: cómo se arma el sistema gráfico para cada cliente y el propio", "minutos": 30, "dia": 1, "creado": 24}, {"id": "wk01egfh1", "texto": "Corregir Tejo", "minutos": 45, "dia": 1, "creado": 25}, {"id": "wk04e13u0", "texto": "Armar sistema gráfico para Instagram: Shine y CM", "minutos": 90, "dia": 2, "creado": 26}, {"id": "wk06993ir", "texto": "Ver qué onda OmniMarca", "minutos": 30, "dia": 2, "creado": 27}, {"id": "wk07265sb", "texto": "Ver recursos: cómo se hacen los bots de mensajes", "minutos": 30, "dia": 3, "creado": 28}, {"id": "wk09mc9p1", "texto": "Configurar bot para WhatsApp", "minutos": 45, "dia": 4, "creado": 29}, {"id": "pd2o6r2s", "texto": "Planificación visual de tareas de la semana", "minutos": 90, "dia": 0, "creado": 30}, {"id": "wk028bzr1", "texto": "Contactar al posible cliente", "minutos": 20, "dia": 1, "creado": 31}, {"id": "wk03frn7r", "texto": "Crear Instagram de CM", "minutos": 15, "dia": 1, "creado": 32}, {"id": "wk05z5gp9", "texto": "Empezar a publicar en Instagram de Shine", "minutos": 40, "dia": 2, "creado": 33}, {"id": "wk08yri1v", "texto": "Automatizar publicaciones y gestionar esa automatización para Shine", "minutos": 60, "dia": 3, "creado": 34}, {"id": "wk108a68f", "texto": "Bot de DM para Shine y para WhatsApp", "minutos": 60, "dia": 4, "creado": 35}, {"id": "pdqu2y5i", "texto": "Almuerzo consciente sin pantallas ni trabajo", "minutos": 90, "dia": null, "creado": 36}, {"id": "pda63l5a", "texto": "Ducha caliente, cena liviana y luces bajas", "minutos": 120, "dia": null, "creado": 37}, {"id": "pdqfg0h5", "texto": "Entrega y toma de medicación recetada + actividad de bajo estímulo", "minutos": 60, "dia": null, "creado": 38}, {"id": "pdig7pbr", "texto": "Apagado de pantallas e ir a la cama", "minutos": 30, "dia": null, "creado": 39}], "plan": {"nota": "Itinerario de Patología Dual con dos anclas clínicas fijas: la medicación a las 19hs (la única del día) y el descanso a las 22hs. El fin de semana quedó repartido: sábado salida y poda, domingo agua y plantas.", "bloques": [{"titulo": "Inicio de Jornada", "motivo": "Rutina, y apenas te pongas con tareas: la modista y la contadora primero, como pediste.", "jornada": 1, "ancla": "08:30", "trabajo": false, "ids": ["pdpqwz8z", "mugerl7thl6ct", "mugc0kekt9253"]}, {"titulo": "Freelance Mañana", "motivo": "El bloque de más concentración, con lo real que ya tenías pendiente: tutorial, Tejo, sistema gráfico, investigación y bots.", "jornada": 1, "ancla": "09:15", "trabajo": true, "ids": ["wk00k2xf3", "wk01egfh1", "wk04e13u0", "wk06993ir", "wk07265sb", "wk09mc9p1", "pd2o6r2s"]}, {"titulo": "Almuerzo", "motivo": "Sin pantalla ni trabajo en el medio.", "jornada": 1, "ancla": "12:30", "trabajo": false, "ids": ["pdqu2y5i"]}, {"titulo": "Freelance Tarde", "motivo": "Gestión, entregas y correos: contactar clientes, publicar, automatizar.", "jornada": 1, "ancla": "14:00", "trabajo": true, "ids": ["wk028bzr1", "wk03frn7r", "wk05z5gp9", "wk08yri1v", "wk108a68f"]}, {"titulo": "Quehaceres / Cierre", "motivo": "Sábado: la salida única (lo de Baba y la verdulería, que domingo está cerrada) y toda la poda. Domingo: nada comercial, puro casa — abono, manguera de grande a chico y las plantas al final. Fin de semana lo podés correr a la mañana.", "jornada": 1, "ancla": "17:30", "trabajo": false, "ids": ["t16", "t17", "t18", "t19", "t20", "t04", "mudgam72mpnq3", "muflycr1aynj4", "t05", "t07", "t08", "t10", "t12", "t15", "t21", "mudga0csnnibj", "t22", "t24", "t26"]}, {"titulo": "Medicación Nocturna", "motivo": "Ancla clínica crítica, la única del día: 19hs, no se corre por nada.", "jornada": 1, "ancla": "19:00", "trabajo": false, "ids": ["pdqfg0h5"]}, {"titulo": "Cena y Desactivación", "motivo": "Ducha, cena liviana y luces bajas, apenas termina la medicación; la ropa de la noche va acá, en el mismo tramo de bajar un cambio.", "jornada": 1, "ancla": null, "trabajo": false, "ids": ["pda63l5a", "t01"]}, {"titulo": "Descanso", "motivo": "Ancla clínica crítica: pantallas apagadas y a la cama.", "jornada": 1, "ancla": "22:00", "trabajo": false, "ids": ["pdig7pbr"]}]}};
+var SEMILLA = {"tareas": [{"id": "t01", "texto": "Poner a lavar la ropa", "minutos": 10, "creado": 1, "dia": null}, {"id": "t04", "texto": "Podar las palmeras", "minutos": 60, "creado": 2, "dia": 6}, {"id": "t05", "texto": "Palear abono", "minutos": 45, "creado": 3, "dia": 0}, {"id": "t07", "texto": "Correr las suculentas de su pisito", "minutos": 10, "creado": 4, "dia": 0}, {"id": "t08", "texto": "Lavar el garaje (el grande)", "minutos": 90, "creado": 5, "dia": 0}, {"id": "t10", "texto": "Lavar el pisito de las suculentas", "minutos": 15, "creado": 6, "dia": 0}, {"id": "t12", "texto": "Reubicar las suculentas según el sol de la temporada", "minutos": 25, "creado": 7, "dia": 0}, {"id": "t15", "texto": "Regar todas las plantas", "minutos": 20, "creado": 8, "dia": 0}, {"id": "t16", "texto": "Baba: poner a lavar sus sábanas", "minutos": 10, "creado": 9, "dia": 6}, {"id": "t17", "texto": "Baba: pasar el trapo a la galería", "minutos": 30, "creado": 10, "dia": 6}, {"id": "t18", "texto": "Baba: ordenar la cama", "minutos": 10, "creado": 11, "dia": 6}, {"id": "t19", "texto": "Baba: sacar verduras", "minutos": 20, "creado": 12, "dia": 6}, {"id": "t20", "texto": "Ir a la verdulería", "minutos": 30, "creado": 13, "dia": 6}, {"id": "t21", "texto": "Limpiar el polvo del modular de la sala", "minutos": 30, "creado": 14, "dia": 1}, {"id": "t22", "texto": "Lavar los platos y ordenar la cocina", "minutos": 30, "creado": 15, "dia": null}, {"id": "t24", "texto": "Barrer la cocina", "minutos": 10, "creado": 16, "dia": null}, {"id": "t26", "texto": "Ayudar a Mau con su cel", "minutos": 20, "creado": 17, "dia": null}, {"id": "mudga0csnnibj", "texto": "Ordenar y limpiar lavadero", "minutos": 25, "creado": 18, "dia": 2}, {"id": "mudgam72mpnq3", "texto": "Podar arbustos", "minutos": 40, "creado": 19, "dia": 6}, {"id": "muflycr1aynj4", "texto": "Podar el pasto", "minutos": 45, "creado": 20, "dia": 6}, {"id": "mugc0kekt9253", "texto": "Contadora", "minutos": 30, "creado": 21, "dia": null}, {"id": "mugerl7thl6ct", "texto": "Cargar en el auto ropa para la modista", "minutos": 10, "creado": 22, "dia": null}, {"id": "pdpqwz8z", "texto": "Aseo personal, desayuno completo e hidratación", "minutos": 45, "dia": null, "creado": 23}, {"id": "wk00k2xf3", "texto": "Ver tutorial: cómo se arma el sistema gráfico para cada cliente y el propio", "minutos": 30, "dia": 1, "creado": 24}, {"id": "wk01egfh1", "texto": "Corregir Tejo", "minutos": 45, "dia": 1, "creado": 25}, {"id": "wk04e13u0", "texto": "Armar sistema gráfico para Instagram: Shine y CM", "minutos": 90, "dia": 2, "creado": 26}, {"id": "wk06993ir", "texto": "Ver qué onda OmniMarca", "minutos": 30, "dia": 2, "creado": 27}, {"id": "wk07265sb", "texto": "Ver recursos: cómo se hacen los bots de mensajes", "minutos": 30, "dia": 3, "creado": 28}, {"id": "wk09mc9p1", "texto": "Configurar bot para WhatsApp", "minutos": 45, "dia": 4, "creado": 29}, {"id": "pd2o6r2s", "texto": "Planificación visual de tareas de la semana", "minutos": 90, "dia": 0, "creado": 30}, {"id": "wk028bzr1", "texto": "Contactar al posible cliente", "minutos": 20, "dia": 1, "creado": 31}, {"id": "wk03frn7r", "texto": "Crear Instagram de CM", "minutos": 15, "dia": 1, "creado": 32}, {"id": "wk05z5gp9", "texto": "Empezar a publicar en Instagram de Shine", "minutos": 40, "dia": 2, "creado": 33}, {"id": "wk08yri1v", "texto": "Automatizar publicaciones y gestionar esa automatización para Shine", "minutos": 60, "dia": 3, "creado": 34}, {"id": "wk108a68f", "texto": "Bot de DM para Shine y para WhatsApp", "minutos": 60, "dia": 4, "creado": 35}, {"id": "pdqu2y5i", "texto": "Almuerzo consciente sin pantallas ni trabajo", "minutos": 90, "dia": null, "creado": 36}, {"id": "pda63l5a", "texto": "Ducha caliente, cena liviana y luces bajas", "minutos": 120, "dia": null, "creado": 37}, {"id": "pdqfg0h5", "texto": "Entrega y toma de medicación recetada + actividad de bajo estímulo", "minutos": 60, "dia": null, "creado": 38}, {"id": "pdig7pbr", "texto": "Apagado de pantallas e ir a la cama", "minutos": 30, "dia": null, "creado": 39}, {"id": "mulnigab19qoh", "texto": "Hacer la cama", "minutos": 5, "dia": null, "creado": 40}, {"id": "mulni1z8km3bm", "texto": "Colgar ropa", "minutos": 15, "dia": null, "creado": 41}, {"id": "muq09t1dn4de5", "texto": "Comprar pastilla", "minutos": 20, "dia": 1, "creado": 42}, {"id": "mulng822fmh1a", "texto": "Revisar con Mau cálculos dash", "minutos": 45, "dia": 5, "creado": 43}, {"id": "muq09gvdolxyd", "texto": "Sacar nísperos y duraznos", "minutos": 30, "dia": 3, "creado": 44}, {"id": "mulngnpx62rvr", "texto": "Hacer compota", "minutos": 45, "dia": 3, "creado": 45}, {"id": "muq08ymh3jw95", "texto": "Comprar puntaoreja", "minutos": 15, "dia": 6, "creado": 46}, {"id": "muq0bemmd52ev", "texto": "Tirar ceniza", "minutos": 10, "dia": 0, "creado": 47}, {"id": "muq0bidhf9aep", "texto": "Quemar pasto", "minutos": 30, "dia": 0, "creado": 48}, {"id": "muq0b9ibs4jc4", "texto": "Sacar basura", "minutos": 5, "dia": null, "creado": 49}], "plan": {"nota": "Itinerario de Patología Dual con dos anclas clínicas fijas: la medicación a las 19hs (la única del día) y el descanso a las 22hs. Sábado: salida y poda. Domingo: casa, agua, plantas y el fuego.", "bloques": [{"titulo": "Inicio de Jornada", "motivo": "Rutina, y apenas te pongas con tareas: la modista y la contadora primero, como pediste.", "jornada": 1, "ancla": "08:30", "trabajo": false, "ids": ["pdpqwz8z", "mugerl7thl6ct", "mugc0kekt9253", "mulnigab19qoh", "mulni1z8km3bm", "muq09t1dn4de5"]}, {"titulo": "Freelance Mañana", "motivo": "El bloque de más concentración, con lo real que ya tenías pendiente: tutorial, Tejo, sistema gráfico, investigación y bots.", "jornada": 1, "ancla": "09:15", "trabajo": true, "ids": ["wk00k2xf3", "wk01egfh1", "wk04e13u0", "wk06993ir", "wk07265sb", "wk09mc9p1", "pd2o6r2s"]}, {"titulo": "Almuerzo", "motivo": "Sin pantalla ni trabajo en el medio.", "jornada": 1, "ancla": "12:30", "trabajo": false, "ids": ["pdqu2y5i"]}, {"titulo": "Freelance Tarde", "motivo": "Gestión, entregas y correos: contactar clientes, publicar, automatizar.", "jornada": 1, "ancla": "14:00", "trabajo": true, "ids": ["wk028bzr1", "wk03frn7r", "wk05z5gp9", "wk08yri1v", "wk108a68f", "mulng822fmh1a"]}, {"titulo": "Quehaceres / Cierre", "motivo": "Sábado: la salida única (lo de Baba y la verdulería, que domingo está cerrada) y toda la poda. Domingo: nada comercial, puro casa — abono, manguera de grande a chico y las plantas al final. Fin de semana lo podés correr a la mañana.", "jornada": 1, "ancla": "17:30", "trabajo": false, "ids": ["t16", "t17", "t18", "t19", "t20", "muq08ymh3jw95", "t04", "mudgam72mpnq3", "muflycr1aynj4", "t05", "t07", "t08", "t10", "t12", "t15", "t21", "mudga0csnnibj", "t22", "t24", "t26", "muq09gvdolxyd", "mulngnpx62rvr", "muq0bemmd52ev", "muq0bidhf9aep"]}, {"titulo": "Medicación Nocturna", "motivo": "Ancla clínica crítica, la única del día: 19hs, no se corre por nada.", "jornada": 1, "ancla": "19:00", "trabajo": false, "ids": ["pdqfg0h5"]}, {"titulo": "Cena y Desactivación", "motivo": "Ducha, cena liviana y luces bajas, apenas termina la medicación; la ropa de la noche va acá, en el mismo tramo de bajar un cambio.", "jornada": 1, "ancla": null, "trabajo": false, "ids": ["pda63l5a", "t01", "muq0b9ibs4jc4"]}, {"titulo": "Descanso", "motivo": "Ancla clínica crítica: pantallas apagadas y a la cama.", "jornada": 1, "ancla": "22:00", "trabajo": false, "ids": ["pdig7pbr"]}]}};
 
 (function(){
   "use strict";
@@ -169,13 +169,24 @@ var SEMILLA = {"tareas": [{"id": "t01", "texto": "Poner a lavar la ropa", "minut
 
   /* ── el día que se mira en las pestañas decide qué tareas se ven ── */
   function diaSemana(){ return deIso(diaVisto).getDay(); }
-  function esDeHoy(t){ return (t.dia === null || t.dia === undefined || t.dia === diaSemana()); }
+  function hechaAlgunDia(id){
+    var f = Object.keys(dias);
+    for(var i=0;i<f.length;i++){ if(dias[f[i]].hechas && dias[f[i]].hechas[id]) return true; }
+    return false;
+  }
+  /* Una tarea con fecha es de una sola vez: aparece ese día y sigue apareciendo
+     hasta que la marques (si no, una que no hiciste desaparecería sin más). */
+  function esDeHoy(t){
+    if(t.fecha) return (diaVisto === t.fecha) || (diaVisto > t.fecha && !hechaAlgunDia(t.id));
+    return (t.dia === null || t.dia === undefined || t.dia === diaSemana());
+  }
 
   function filaTarea(t){
     var hh = hechaEn(t.id);
-    return '<div class="task'+(hh?' ok':'')+'" data-fila="'+t.id+'">'+
+    return '<div class="task'+(hh?' ok':'')+(t.prioridad?' prio':'')+'" data-fila="'+t.id+'">'+
       '<button type="button" class="tick" data-tick="'+t.id+'" role="checkbox" aria-checked="'+(hh?'true':'false')+'" aria-label="'+esc(t.texto)+'">✓</button>'+
       '<span class="txt">'+esc(t.texto)+'</span>'+
+      (t.prioridad ? '<button type="button" class="estrella" data-prio="'+t.id+'" aria-label="Quitarle la prioridad a '+esc(t.texto)+'">\u2605</button>' : '')+
       (hh ? '<button type="button" class="hecha" data-hora="'+t.id+'" aria-label="Cambiar la hora">'+esc(hh)+'</button>'
          : (t.minutos ? '<span class="min">'+minutosTxt(t.minutos)+'</span>' : ''))+
       '<button type="button" class="del" data-quitar="'+t.id+'" aria-label="Borrar '+esc(t.texto)+'">✕</button></div>';
@@ -216,9 +227,11 @@ var SEMILLA = {"tareas": [{"id": "t01", "texto": "Poner a lavar la ropa", "minut
     document.getElementById('jNota').textContent = partes.join(' ');
 
     renderDiasSem();
-    document.getElementById('addDonde').textContent = todosLosDias
-      ? 'Lo que agregues va a aparecer todos los días.'
+    var leyenda = todosLosDias ? 'Lo que agregues va a aparecer todos los días.'
+      : soloHoy ? 'Lo que agregues es solo para este día, no se repite.'
       : ('Lo que agregues queda en ' + DIAS[d.getDay()] + '.');
+    if(esPrioridad) leyenda += ' Y va arriba, en Primero.';
+    document.getElementById('addDonde').textContent = leyenda;
 
     var elAl = document.getElementById('jAlerta');
     if(esTarde(r.acostada)){
@@ -300,6 +313,22 @@ var SEMILLA = {"tareas": [{"id": "t01", "texto": "Poner a lavar la ropa", "minut
     return n;
   }
 
+  /* El plan ya sabe en qué orden conviene hacer las cosas (lo de salir junto, etc.):
+     respetamos ese orden entre las prioritarias en vez de inventar uno nuevo. */
+  function ordenDelPlan(lista){
+    var pos = {}, n = 0;
+    if(plan && plan.bloques){
+      plan.bloques.forEach(function(b){
+        (b.ids||[]).forEach(function(id){ if(!(id in pos)) pos[id] = n++; });
+      });
+    }
+    return lista.slice().sort(function(a,b){
+      var pa = (a.id in pos) ? pos[a.id] : 9999, pb = (b.id in pos) ? pos[b.id] : 9999;
+      if(pa !== pb) return pa - pb;
+      return (a.creado||0) - (b.creado||0);
+    });
+  }
+
   function renderTareas(){
     renderDia();
     var r = reg(diaVisto);
@@ -321,6 +350,17 @@ var SEMILLA = {"tareas": [{"id": "t01", "texto": "Poner a lavar la ropa", "minut
 
     var hs = horarios();
     var usados = {}, html = '', jornadaActual = null;
+
+    /* Lo marcado como prioridad sale del plan y se va arriba: es lo primero que mirás.
+       Conserva el orden del plan entre ellas, para que "si es para salir" caiga donde va. */
+    var prios = ordenDelPlan(tareas.filter(function(t){ return t.prioridad && esDeHoy(t); }));
+    if(prios.length){
+      prios.forEach(function(t){ usados[t.id] = 1; });
+      html += '<div class="bloque primero"><div class="bloque-t"><span>Primero</span>'+
+        '<span class="mins">'+minutosTxt(prios.reduce(function(a,t){ return a+(t.minutos||0); },0))+'</span></div>'+
+        '<div class="bloque-m">Lo que marcaste como prioridad, en el orden en que te queda de paso.</div>'+
+        prios.map(filaTarea).join('')+'</div>';
+    }
     var hayDosJornadas = !!(plan && plan.bloques && plan.bloques.some(function(b){ return (b.jornada||1) === 2; }));
 
     if(plan && plan.bloques){
@@ -366,6 +406,7 @@ var SEMILLA = {"tareas": [{"id": "t01", "texto": "Poner a lavar la ropa", "minut
         var id = fila.getAttribute('data-fila');
         fila.addEventListener('click', function(ev){
           if(ev.target.closest('[data-quitar]')) return;
+          if(ev.target.closest('[data-prio]')){ quitarPrioridad(id); return; }
           if(ev.target.closest('[data-hora]')){ editarHora(id); return; }
           alternar(id);
         });
@@ -445,14 +486,18 @@ var SEMILLA = {"tareas": [{"id": "t01", "texto": "Poner a lavar la ropa", "minut
 
   function guardarTareas(){ save(KT,tareas); save(KP,plan); empujarDB(); }
 
-  var todosLosDias = false;
+  var todosLosDias = false, soloHoy = false, esPrioridad = false;
 
   function agregarTarea(){
     var i=document.getElementById('tareaNueva');
     var v=i.value.trim();
     if(!v) return;
     /* ya no hay selector por fila: la tarea cae en el día que estás mirando */
-    tareas.push({ id:uid(), texto:v, hecho:false, minutos:0, dia:(todosLosDias ? null : diaSemana()), creado:Date.now() });
+    var t = { id:uid(), texto:v, hecho:false, minutos:0, dia:(todosLosDias ? null : diaSemana()), creado:Date.now() };
+    /* "Hoy" es una fecha, no un día de la semana: no se repite el jueves que viene. */
+    if(soloHoy && !todosLosDias){ t.fecha = diaVisto; t.dia = null; }
+    if(esPrioridad) t.prioridad = true;
+    tareas.push(t);
     i.value='';
     guardarTareas();
     renderTareas();
@@ -461,14 +506,35 @@ var SEMILLA = {"tareas": [{"id": "t01", "texto": "Poner a lavar la ropa", "minut
   document.getElementById('addTarea').addEventListener('click', agregarTarea);
   document.getElementById('addTodos').addEventListener('click', function(){
     todosLosDias = !todosLosDias;
+    /* "todos los días" y "hoy" se contradicen: la última que toques manda. */
+    if(todosLosDias && soloHoy){ soloHoy = false; document.getElementById('addHoy').setAttribute('aria-pressed','false'); }
     this.setAttribute('aria-pressed', todosLosDias ? 'true' : 'false');
+    renderDia();
+  });
+  document.getElementById('addHoy').addEventListener('click', function(){
+    soloHoy = !soloHoy;
+    if(soloHoy && todosLosDias){ todosLosDias = false; document.getElementById('addTodos').setAttribute('aria-pressed','false'); }
+    this.setAttribute('aria-pressed', soloHoy ? 'true' : 'false');
+    renderDia();
+  });
+  document.getElementById('addPrio').addEventListener('click', function(){
+    esPrioridad = !esPrioridad;
+    this.setAttribute('aria-pressed', esPrioridad ? 'true' : 'false');
     renderDia();
   });
   document.getElementById('tareaNueva').addEventListener('keydown', function(e){
     if(e.key==='Enter'){ e.preventDefault(); agregarTarea(); }
   });
 
+  function quitarPrioridad(id){
+    var tp=tareaDe(id);
+    if(!tp) return;
+    delete tp.prioridad;
+    guardarTareas(); renderTareas();
+  }
+
   elTareas.addEventListener('click', function(e){
+    if(e.target.closest('[data-prio]')) return;
     var q=e.target.closest('[data-quitar]');
     if(!q) return;
     var id=q.getAttribute('data-quitar');
@@ -504,7 +570,12 @@ var SEMILLA = {"tareas": [{"id": "t01", "texto": "Poner a lavar la ropa", "minut
 
   /* ── puente manual con Claude ── */
   function resumenParaClaude(){
-    var out = { generado: iso(new Date()), tareas: tareas.map(function(t){ return {id:t.id, texto:t.texto, minutos:t.minutos}; }), dias:{} };
+    var out = { generado: iso(new Date()), tareas: tareas.map(function(t){
+      var o = {id:t.id, texto:t.texto, minutos:t.minutos, dia:(t.dia===undefined?null:t.dia)};
+      if(t.fecha) o.fecha = t.fecha;
+      if(t.prioridad) o.prioridad = true;
+      return o;
+    }), dias:{} };
     Object.keys(dias).sort().slice(-21).forEach(function(f){
       var r=dias[f];
       var algo = r.acostada||r.levantada||r.deLargo||r.trabajo.desde||Object.keys(r.hechas||{}).length;
