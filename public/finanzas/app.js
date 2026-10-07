@@ -38,6 +38,32 @@ var SEMILLA = {"tareas": [{"id": "t01", "texto": "Poner a lavar la ropa", "minut
   /* ═══════════ utilidades ═══════════ */
   var fmt = new Intl.NumberFormat('es-AR',{maximumFractionDigits:0});
   function plata(n){ return '$' + fmt.format(Math.round(n)); }
+
+  // De qué bolsillo salió o entró la plata. Se deduce de lo que escribo en el
+  // movimiento: "efe" o "efectivo" es efectivo, "bille", "transf", "mp" y
+  // compañía es digital. Si no digo nada, queda sin asignar.
+  var RE_EFE = [/\befe\b/, /\befectivo\b/, /\bcash\b/, /\ben mano\b/];
+  var RE_DIG = [
+    /\bbille\b/, /\billetera\b/, /\btransf\w*/, /\bmp\b/, /\bmercado ?pago\b/,
+    /\bual[áa]\b/, /\bbrubank\b/, /\bbanco\b/, /\bc[bv]u\b/, /\balias\b/,
+    /\bd[ée]bito\b/, /\bcr[ée]dito\b/, /\btarjeta\b/, /\bqr\b/, /\bdigital\b/
+  ];
+  function sinTildes(t){
+    return (t||'').toLowerCase()
+      .replace(/[áà]/g,'a').replace(/[éè]/g,'e').replace(/[íì]/g,'i')
+      .replace(/[óò]/g,'o').replace(/[úùü]/g,'u');
+  }
+  function calza(txt, res){
+    for(var i=0;i<res.length;i++){ if(res[i].test(txt)) return true; }
+    return false;
+  }
+  function medioDe(m){
+    var c = catDe(m.tipo, m.cat);
+    var txt = sinTildes(m.desc + ' ' + (c ? c.nom : ''));
+    if(calza(txt, RE_EFE)) return 'efe';
+    if(calza(txt, RE_DIG)) return 'dig';
+    return null;
+  }
   function corto(n){
     var a=Math.abs(n);
     if(a>=1000000) return '$'+(Math.round(n/100000)/10).toString().replace('.',',')+'M';
@@ -816,6 +842,35 @@ var SEMILLA = {"tareas": [{"id": "t01", "texto": "Poner a lavar la ropa", "minut
     dibujarTabla();
   });
 
+  // Debajo del total: cuánto de eso es efectivo y cuánto está en digital.
+  function pintarMedios(lista){
+    var el=document.getElementById('medios');
+    var neto={ efe:0, dig:0, sin:0 }, cuenta={ efe:0, dig:0, sin:0 };
+    lista.forEach(function(m){
+      var k=medioDe(m)||'sin';
+      neto[k]+=(m.tipo==='ingreso'?m.monto:-m.monto);
+      cuenta[k]++;
+    });
+    if(!lista.length){ el.hidden=true; el.innerHTML=''; return; }
+    el.hidden=false;
+    if(!cuenta.efe && !cuenta.dig){
+      el.innerHTML='<div class="pista">Escribí <b>efe</b> o <b>bille</b> en el movimiento y te separo cuánto es efectivo y cuánto digital.</div>';
+      return;
+    }
+    var partes=[
+      { k:'efe', cls:'efe', lbl:'Efectivo' },
+      { k:'dig', cls:'dig', lbl:'Digital' },
+      { k:'sin', cls:'', lbl:'Sin asignar' }
+    ];
+    el.innerHTML=partes.filter(function(x){ return cuenta[x.k]>0; }).map(function(x){
+      var v=neto[x.k];
+      return '<div class="m '+x.cls+(v<0?' neg':'')+'">'+
+               '<span class="l">'+x.lbl+'</span>'+
+               '<span class="v">'+(v<0?'-':'')+plata(Math.abs(v))+'</span>'+
+             '</div>';
+    }).join('');
+  }
+
   function render(){
     if(!desbloqueado) return;
     renderPagos();
@@ -840,6 +895,7 @@ var SEMILLA = {"tareas": [{"id": "t01", "texto": "Poner a lavar la ropa", "minut
     else if(bal===0) nota='Gastaste exactamente lo que entró.';
     else nota='Estás en rojo: gastaste '+plata(Math.abs(bal))+' más de lo que entró.';
     document.getElementById('balanceNote').textContent=nota;
+    pintarMedios(lista);
 
     document.getElementById('nextM').disabled=(vista.y>hoy.getFullYear())||(vista.y===hoy.getFullYear()&&vista.m>=hoy.getMonth());
 
