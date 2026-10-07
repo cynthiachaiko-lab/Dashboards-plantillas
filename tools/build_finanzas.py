@@ -28,7 +28,9 @@ open(os.path.join(OUT, 'index.html'), 'w', encoding='utf-8').write(index)
 open(os.path.join(OUT, 'estilo.css'), 'w', encoding='utf-8').write(css)
 open(os.path.join(OUT, 'app.js'), 'w', encoding='utf-8').write(sem_line + '\n\n' + js)
 
-full = src.replace('<style>', '<script>\n' + sem_line + '\n</script>\n<style>', 1)
+# La semilla va justo antes del <script> principal, como esta publicado el artifact.
+full = src.replace('<script>\n' + js + '\n</script>',
+                   '<script>' + sem_line + '</script>\n<script>\n' + js + '\n</script>', 1)
 open(os.path.join(ROOT, 'full.html'), 'w', encoding='utf-8').write(full)
 
 nf = len(re.findall(r'function\s+[A-Za-z_$]', js))

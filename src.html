@@ -911,9 +911,9 @@
   // De qué bolsillo salió o entró la plata. Se deduce de lo que escribo en el
   // movimiento: "efe" o "efectivo" es efectivo, "bille", "transf", "mp" y
   // compañía es digital. Si no digo nada, queda sin asignar.
-  var RE_EFE = [/\befe\b/, /\befectivo\b/, /\bcash\b/, /\ben mano\b/];
+  var RE_EFE = [/\befe\b/, /\befectivo\b/, /\bcash\b/, /\ben mano\b/, /\bbilletes?\b/];
   var RE_DIG = [
-    /\bbille\b/, /\billetera\b/, /\btransf\w*/, /\bmp\b/, /\bmercado ?pago\b/,
+    /\bbille\w*/, /\btransf\w*/, /\bmp\b/, /\bmercado ?pago\b/,
     /\bual[áa]\b/, /\bbrubank\b/, /\bbanco\b/, /\bc[bv]u\b/, /\balias\b/,
     /\bd[ée]bito\b/, /\bcr[ée]dito\b/, /\btarjeta\b/, /\bqr\b/, /\bdigital\b/
   ];
